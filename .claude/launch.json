@@ -1,0 +1,1 @@
+{ "version": "0.0.1", "configurations": [ { "name": "gardenmark", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "--port", "5191", "--strictPort"], "port": 5191 } ] }

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GardenMark Image Briefs</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+  <style>
+    .brief { border-top: 1px solid var(--line); padding: 28px 0; display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+    .brief h3 { margin: 0 0 6px; font-size: 1.25rem; }
+    .brief dl { display: grid; grid-template-columns: 130px 1fr; gap: 6px 16px; margin: 0 0 14px; font-size: .95rem; }
+    .brief dt { color: var(--ink-2); }
+    .brief dd { margin: 0; }
+    .prompt { position: relative; background: var(--forest); color: var(--on-dark); border-radius: 12px; padding: 16px 18px 16px; font-family: var(--font); font-size: .92rem; line-height: 1.6; white-space: pre-wrap; }
+    .prompt + .prompt { margin-top: 10px; }
+    .prompt .k { display: block; font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; color: var(--leaf); margin-bottom: 8px; }
+    .copy { position: absolute; top: 10px; right: 10px; border: 1px solid var(--line-dark); background: transparent; color: var(--on-dark); border-radius: 999px; padding: 4px 10px; font-size: .75rem; cursor: pointer; }
+    .ref { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ref img { width: 100px; height: 76px; object-fit: cover; border-radius: 8px; }
+    .slot { font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--thatch-ink); font-size: .72rem; }
+    @media (max-width: 760px) { .brief { grid-template-columns: 1fr; } .brief dl { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="doc">
+<header class="doc-head">
+  <div class="narrow">
+    <h1>Image briefs and AI prompts</h1>
+    <p>Every lifestyle image the site still needs, with composition, light, aspect ratio and placement, plus a ready-to-use prompt. Technical images (product close-ups, SafeMark) must be real photography and have their own brief at the end.</p>
+  </div>
+</header>
+
+<main class="doc-body container" style="max-width:1080px">
+  <h2>Rules for every AI image</h2>
+  <ul>
+    <li><b>Label it.</b> Caption every AI image on the site: “Illustrative image created with AI. Not a GardenMark installation.” Never use one in the gallery, the product explorer or SafeMark.</li>
+    <li><b>Artificial turf only.</b> The lawn in each scene must read as GardenMark-style synthetic grass, never natural grass. Check every output for clover, weeds, bare soil or mowing stripes and reject it if you find any.</li>
+    <li><b>Match the real product.</b> Use the GardenMark product photos below as image references, set to low-to-medium image weight so they guide color and texture only.</li>
+    <li><b>Human, not staged.</b> Candid moments, nobody looking at the camera, believable American households. No implied safety claims: no toddlers face-down on turf, no dogs panting on hot turf in full sun.</li>
+    <li><b>Deliver large.</b> At least 2400 px on the long edge. Export WebP at quality 70–75 into <span class="slot">public/img/ai/</span>.</li>
+  </ul>
+
+  <h3>Product references (attach as image prompts)</h3>
+  <div class="ref">
+    <img src="/img/gm/montana.webp" alt="Montana product photo">
+    <img src="/img/gm/kentucky.webp" alt="Kentucky product image">
+    <img src="/img/gm/augusta.webp" alt="Augusta product photo">
+    <img src="/img/gm/canine-thumb.webp" alt="Canine product image">
+    <img src="/img/gm/jc-3-uniform.webp" alt="Installed GardenMark lawn beside a planted bed">
+    <img src="/img/gm/surf-city-2_uniform.webp" alt="Installed GardenMark lawn with paver path">
+  </div>
+
+  <h3>Shared style block (append to every prompt)</h3>
+  <div class="prompt"><span class="k">Style</span>Candid documentary lifestyle photograph, 35mm lens look, natural late-afternoon light with soft long shadows, warm but accurate color, gentle film grain, muted saturation, Northeast United States residential architecture, nobody looking at the camera, no text, no logos.
+
+Turf: premium artificial grass, 1.75-inch pile, blades blended in three greens (deep olive, mid green, light spring green) with a tan-brown crimped thatch visible low between the blades, matte finish, slight natural variation in tone, crisp edges where it meets stone pavers, timber edging or planting beds.<button class="copy" type="button">Copy</button></div>
+  <div class="prompt"><span class="k">Negative prompt</span>natural grass, clover, weeds, bare soil, mowing stripes, neon green, oversaturated, uniform green carpet, glossy plastic sheen, visible seams, people posing, smiling at camera, text, logo, watermark, distorted hands, extra fingers, fisheye, HDR halo<button class="copy" type="button">Copy</button></div>
+
+  <h2>Lifestyle images</h2>
+
+  <section class="brief">
+    <div><p class="slot">AI-01</p><h3>Hero, “A lawn worth coming home to.”</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Optional second hero frame or a full-bleed band between Why and Spaces. The rendered Montana sample stays as the hero product visual.</dd>
+        <dt>Aspect</dt><dd>16:9, 3200 × 1800 minimum. Keep the subject in the middle 40% vertically.</dd>
+        <dt>Composition</dt><dd>Eye-level, wide view across a narrow brick townhouse garden. Turf runs from a bluestone patio to a planted border. A parent and child sit on the turf edge in the mid-ground, small in frame. String lights overhead, not yet lit.</dd>
+        <dt>Light</dt><dd>Golden hour, sun low from frame right, warm rim light on the blades.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Wide eye-level photograph of a narrow brick townhouse back garden in Jersey City at golden hour, artificial grass lawn running from a bluestone patio to a planted border of hydrangeas and ornamental grasses, a parent and young child sitting together on the edge of the lawn in the mid-ground seen from the side, reading a picture book, unlit string lights overhead, timber fence, warm low sun from the right catching the grass blades --ar 16:9<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-02</p><h3>“Your Saturday back.”</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Why section, first outcome, “Your Saturday back.” (currently a GardenMark project photo with no people).</dd>
+        <dt>Aspect</dt><dd>4:5, 2400 × 3000.</dd>
+        <dt>Composition</dt><dd>Family of four mid-afternoon on the turf: one parent kneels setting up a croquet hoop, kids laughing with each other, the second parent carries lemonade from the back door. Nobody faces the camera.</dd>
+        <dt>Light</dt><dd>Soft overcast-bright afternoon, open shade.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Candid photograph of a family of four on a Saturday afternoon in a suburban New Jersey backyard with an artificial grass lawn, one parent kneeling to set up a croquet hoop, two children laughing together in the background, the other parent walking out of a white shingled back door carrying a pitcher of lemonade, planted beds and a cedar fence, soft bright open shade --ar 4:5<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-03</p><h3>“Less mud at the back door.”</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Why section, second outcome, “Less mud at the back door.”</dd>
+        <dt>Aspect</dt><dd>4:5, 2400 × 3000.</dd>
+        <dt>Composition</dt><dd>Low angle from inside the doorway: a medium-size dog trots from the turf onto a clean light-oak floor and doormat after rain. Wet stone patio, clean paws, a child’s rain boots by the door.</dd>
+        <dt>Light</dt><dd>Just after rain, diffuse daylight, damp sheen on the stone but not on the turf.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Low-angle photograph from inside an open back door looking out to a small artificial grass yard just after rain, a medium-size mixed-breed dog trotting in onto a clean coir doormat and light oak floor, wet bluestone step, a pair of child’s yellow rain boots by the door, diffuse grey daylight, calm domestic mood --ar 4:5<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-04</p><h3>“Green where grass gives up.”</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Why section, third outcome, “Green where grass gives up.”</dd>
+        <dt>Aspect</dt><dd>4:5.</dd>
+        <dt>Composition</dt><dd>Shaded garden under a mature London plane tree. Turf panel bordered by ferns and hostas; a grandparent reads in an Adirondack chair while a grandchild draws with chalk on the patio.</dd>
+        <dt>Light</dt><dd>Dappled shade with small sun flecks.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Photograph of a deeply shaded city garden under a mature London plane tree, a rectangle of artificial grass bordered by ferns and hostas, a grandparent reading in a white Adirondack chair, a grandchild drawing with chalk on the brick patio nearby, dappled light with small sun flecks on the grass --ar 4:5<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-05</p><h3>Pets: dog run in the shade</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Spaces, Pets panel (second image), and the Canine story.</dd>
+        <dt>Aspect</dt><dd>4:5.</dd>
+        <dt>Composition</dt><dd>Owner rinses a corner of a fenced pet yard with a hose while a dog rests in the shade of a sail canopy. Turf reference: Canine, 1-inch pile, denser and more even.</dd>
+        <dt>Light</dt><dd>Morning, cool and soft.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Candid photograph of a small fenced pet yard behind a row house in the morning, a person rinsing one corner of the short dense artificial grass with a garden hose, a golden retriever lying relaxed in the shade of a white sail canopy, galvanized planters along the fence, soft cool morning light. Turf: 1-inch pile, dense even green blades, no visible thatch --ar 4:5<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-06</p><h3>Rooftop at dusk</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Spaces, Rooftops panel (second image).</dd>
+        <dt>Aspect</dt><dd>16:10.</dd>
+        <dt>Composition</dt><dd>Roof terrace with a turf panel framed by ipe decking and planters, two friends talking at a low table, skyline across the Hudson softly out of focus.</dd>
+        <dt>Light</dt><dd>Blue hour, warm lanterns.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Photograph of a Hoboken rooftop terrace at blue hour, a panel of artificial grass framed by ipe decking and tall planters of ornamental grasses, two friends talking at a low outdoor table with warm lanterns, the Manhattan skyline across the Hudson softly out of focus --ar 16:10<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-07</p><h3>Backyard putting green</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Spaces, Putting greens panel (second image).</dd>
+        <dt>Aspect</dt><dd>16:10.</dd>
+        <dt>Composition</dt><dd>Grandparent lines up a putt while a teenager holds the flag. Augusta reference: very short, tight bentgrass-like putting surface with a taller fringe of landscape turf around it.</dd>
+        <dt>Light</dt><dd>Late afternoon, long shadows across the green.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Candid photograph of a backyard putting green in a suburban New Jersey garden, a grandparent lining up a putt while a teenage grandchild holds the flag, very short tight artificial putting surface like bentgrass surrounded by a taller fringe of artificial lawn, stone edging and flowering shrubs, long late-afternoon shadows --ar 16:10<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <section class="brief">
+    <div><p class="slot">AI-08</p><h3>Evening gathering</h3></div>
+    <div>
+      <dl>
+        <dt>Placement</dt><dd>Final “Let’s find your dealer.” section background (optional, at 20–30% under the forest gradient).</dd>
+        <dt>Aspect</dt><dd>21:9, 3600 × 1540.</dd>
+        <dt>Composition</dt><dd>Long table on the turf, three generations mid-meal, seen from a distance behind a planted border. Faces small and turned to each other.</dd>
+        <dt>Light</dt><dd>Dusk, string lights on, sky still faintly blue.</dd>
+      </dl>
+      <div class="prompt"><span class="k">Prompt</span>Wide photograph at dusk of three generations sharing dinner at a long wooden table set on an artificial grass lawn behind a shingle-style house, seen from a distance through a planted border, string lights glowing overhead, sky faintly blue, faces small and turned toward each other --ar 21:9<button class="copy" type="button">Copy</button></div>
+    </div>
+  </section>
+
+  <h2>Technical images: real photography only</h2>
+  <p>These show product facts, so they must be photographs of actual GardenMark material. Don’t generate them.</p>
+
+  <section class="brief">
+    <div><p class="slot">PH-01</p><h3>Macro of each style</h3></div>
+    <div><dl>
+      <dt>Placement</dt><dd>Hero and product panels, replacing the rendered samples once real macros exist.</dd>
+      <dt>Spec</dt><dd>Montana, Kentucky, Augusta, Canine. Three shots each: (a) a 12 × 9 in sample at a 30° downward angle on a dark olive sweep (#1b1f13), warm key light from the back left, focus stacked, 5:4 at 6000 px; (b) profile at blade level with a steel ruler in frame; (c) top-down in open shade outdoors.</dd>
+      <dt>Must show</dt><dd>True blade colors, thatch color and curl, backing edge. No color grading beyond white balance from a gray card.</dd>
+    </dl></div>
+  </section>
+  <section class="brief">
+    <div><p class="slot">PH-02</p><h3>SafeMark cut sample</h3></div>
+    <div><dl>
+      <dt>Placement</dt><dd>SafeMark section, next to the diagram.</dd>
+      <dt>Spec</dt><dd>A cut block of the tested configuration (pad thickness and layers as tested, Montana, sand infill), 3/4 view, studio light from top left, black background. 3:2, 5000 px. Caption with the exact configuration.</dd>
+    </dl></div>
+  </section>
+  <section class="brief">
+    <div><p class="slot">PH-03</p><h3>Installations in high resolution</h3></div>
+    <div><dl>
+      <dt>Placement</dt><dd>Gallery, Spaces panels, scroll sequence.</dd>
+      <dt>Spec</dt><dd>Reshoot 10 to 15 existing projects (urban, shore, rooftop, dog run, putting green) at 6000 px, daylight, no saturation boost. Record city, product, install year and the owner’s photo permission for each.</dd>
+    </dl></div>
+  </section>
+  <section class="brief">
+    <div><p class="slot">PH-04</p><h3>Edges and seams</h3></div>
+    <div><dl>
+      <dt>Placement</dt><dd>Backyards panel, Why section.</dd>
+      <dt>Spec</dt><dd>Close-ups of turf meeting pavers, timber edging and planting; a finished seam viewed at an angle. 3:2.</dd>
+    </dl></div>
+  </section>
+
+  <p><a class="text-link" href="/strategy.html">Research and claims register</a> <span aria-hidden="true">/</span> <a class="text-link" href="/">Homepage</a></p>
+</main>
+<script>
+document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', async () => {
+  const text = b.parentElement.childNodes[1].textContent.trim();
+  try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch { b.textContent = 'Select to copy'; }
+}));
+</script>
+</body>
+</html>

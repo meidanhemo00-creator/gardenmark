@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GardenMark Logo Refinement</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body class="doc">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gm-mark" viewBox="0 0 32 32">
+    <path fill="#8dc63f" d="M2.5,1 H9 A6 6 0 0 1 15,7 V13.5 Q15,15 13.5,15 H7 A6 6 0 0 1 1,9 V2.5 Q1,1 2.5,1 Z"/>
+    <path fill="#5da12e" d="M18.5,1 H25 A6 6 0 0 1 31,7 V13.5 Q31,15 29.5,15 H23 A6 6 0 0 1 17,9 V2.5 Q17,1 18.5,1 Z"/>
+    <path fill="#5da12e" d="M2.5,17 H9 A6 6 0 0 1 15,23 V29.5 Q15,31 13.5,31 H7 A6 6 0 0 1 1,25 V18.5 Q1,17 2.5,17 Z"/>
+  </symbol>
+  <symbol id="gm-mono" viewBox="0 0 32 32">
+    <path fill="currentColor" opacity=".55" d="M2.5,1 H9 A6 6 0 0 1 15,7 V13.5 Q15,15 13.5,15 H7 A6 6 0 0 1 1,9 V2.5 Q1,1 2.5,1 Z"/>
+    <path fill="currentColor" d="M18.5,1 H25 A6 6 0 0 1 31,7 V13.5 Q31,15 29.5,15 H23 A6 6 0 0 1 17,9 V2.5 Q17,1 18.5,1 Z"/>
+    <path fill="currentColor" d="M2.5,17 H9 A6 6 0 0 1 15,23 V29.5 Q15,31 13.5,31 H7 A6 6 0 0 1 1,25 V18.5 Q1,17 2.5,17 Z"/>
+  </symbol>
+</svg>
+
+<header class="doc-head">
+  <div class="narrow">
+    <h1>A careful refresh of the GardenMark logo</h1>
+    <p>Same name, same leaf-tile idea, same greens. It’s cleaner to draw, easier to read at small sizes, and works in one color.</p>
+  </div>
+</header>
+
+<main class="doc-body narrow">
+  <h2>Before and after</h2>
+  <div class="logo-grid">
+    <div class="logo-card"><span class="cap">Current logo</span><img src="/img/gm/logo-original.png" alt="The current GardenMark logo: green squares, a rounded slab wordmark with a leaf in the G, the words Artificial Grass, and a registered mark." width="300" height="77"></div>
+    <div class="logo-card"><span class="cap">Proposed refinement</span><span class="lockup"><svg aria-hidden="true"><use href="#gm-mark"/></svg><span>GardenMark<sup>®</sup></span></span></div>
+  </div>
+
+  <h3>What changed and why</h3>
+  <ul>
+    <li><b>Symbol.</b> The loose cluster of rounded squares becomes three leaf tiles on a strict two-by-two grid. Each tile has two softened opposite corners, taken from the shape of the existing icon. The empty fourth cell keeps the open, growing feel of the original and gives the mark a silhouette you can recognize at 16 px.</li>
+    <li><b>Wordmark.</b> The rounded slab with a leaf inside the G is replaced by Host Grotesk Semibold with tightened spacing. The camel-case “GardenMark” and the ® stay. The leaf now lives in the symbol only, so the two parts no longer compete.</li>
+    <li><b>Descriptor.</b> “Artificial Grass” moves out of the primary lockup. It’s still available as a secondary lockup for packaging, roll labels and trade-show material, where the product category isn’t obvious.</li>
+    <li><b>Color.</b> The two existing greens stay. The lime is reserved for the lighter tile and for accents on dark backgrounds, so it never carries small text on white.</li>
+  </ul>
+  <p class="note">This is a proposal. The original artwork wasn’t available as vector files. Before production, check the refinement against GardenMark’s trademark registration and redraw it from the original masters.</p>
+
+  <h2>Lockups and backgrounds</h2>
+  <div class="logo-grid">
+    <div class="logo-card dark"><span class="cap">On deep forest</span><span class="lockup"><svg aria-hidden="true"><use href="#gm-mark"/></svg><span>GardenMark<sup>®</sup></span></span></div>
+    <div class="logo-card"><span class="cap">Secondary lockup with descriptor</span><span class="lockup stack"><svg aria-hidden="true" style="width:1.4em;height:1.4em"><use href="#gm-mark"/></svg><span style="text-align:center">GardenMark<sup>®</sup><span class="desc">Artificial Grass</span></span></span></div>
+    <div class="logo-card"><span class="cap">One color, dark</span><span class="lockup" style="color:#0f2a1c"><svg aria-hidden="true"><use href="#gm-mono"/></svg><span>GardenMark<sup>®</sup></span></span></div>
+    <div class="logo-card lime"><span class="cap">One color, on brand lime</span><span class="lockup"><svg aria-hidden="true"><use href="#gm-mono"/></svg><span>GardenMark<sup>®</sup></span></span></div>
+  </div>
+
+  <h2>Small sizes</h2>
+  <div class="logo-grid">
+    <div class="logo-card"><span class="cap">Symbol at 16, 24, 32 and 48 px</span>
+      <div class="sizes">
+        <div><svg width="16" height="16" aria-hidden="true"><use href="#gm-mark"/></svg><br>16</div>
+        <div><svg width="24" height="24" aria-hidden="true"><use href="#gm-mark"/></svg><br>24</div>
+        <div><svg width="32" height="32" aria-hidden="true"><use href="#gm-mark"/></svg><br>32</div>
+        <div><svg width="48" height="48" aria-hidden="true"><use href="#gm-mark"/></svg><br>48</div>
+      </div>
+    </div>
+    <div class="logo-card"><span class="cap">Mobile header, 375 px wide</span>
+      <div style="width:100%;max-width:343px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff">
+        <span class="brand" style="font-size:1.15rem"><svg aria-hidden="true" style="width:24px;height:24px"><use href="#gm-mark"/></svg><span>GardenMark<sup>®</sup></span></span>
+        <span style="font-size:.85rem;font-weight:600;border:1px solid currentColor;border-radius:999px;padding:6px 12px">Menu</span>
+      </div>
+    </div>
+  </div>
+  <p><a class="text-link" href="/">Back to the homepage</a></p>
+</main>
+</body>
+</html>
