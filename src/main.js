@@ -281,7 +281,8 @@ function renderSafeMark() {
   if (smOn && active < 0 && p < 0.3) smNotes[0].classList.add('on');
 }
 function setSafeMarkMode() {
-  smOn = !reduceMotion.matches && window.innerHeight >= 560;
+  // On phones the full exploded view with every note reads better than a pinned sequence.
+  smOn = !reduceMotion.matches && window.innerHeight >= 560 && window.innerWidth >= 760;
   sm.classList.toggle('is-animated', smOn);
   renderSafeMark();
 }

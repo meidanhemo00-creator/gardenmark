@@ -31,7 +31,7 @@ function tile(x0, x1, z0, z1, sw, sd, gap) {
 export const STEPS = [
   { key: 'base', title: 'Base and frame', text: 'A compacted base, prepared like a paver base, at a depth that lets the finished surface sit flush. A heavy-duty pressure-treated wood frame goes around the edge where there isn’t one.' },
   { key: 'pad1', title: 'First pad layer', text: 'ShockPad sheets, 40 × 60 in and 0.75 in or 1 in thick, laid inside the frame.' },
-  { key: 'drain', title: 'Drainage gaps', text: 'The sheets aren’t seamed together. Water drains down through the gaps between them.' },
+  { key: 'drain', title: 'Drainage joints', text: 'The sheets aren’t seamed together. Water drains down through the joints between them.' },
   { key: 'pad2', title: 'Second layer, if specified', text: 'Laid perpendicular to the first layer. The two layers aren’t glued to each other.' },
   { key: 'glue', title: 'Glued, never nailed', text: 'Pad edges are glued to the frame with BondMark. Nails are never used in a shock-pad installation.' },
   { key: 'turf', title: 'Montana on top', text: 'The turf is pulled taut, spot-glued to the pad about every 6 in, and glued to the frame along the edges.' },
@@ -60,33 +60,25 @@ export function buildInstall(svg) {
   g += group(0, rail(0, W, 0, T) + rail(0, T, 0, D), 'b-drop', 120);
 
   // 2. First pad layer: 40 × 60 sheets (2.1 × 3.4 units), unseamed.
-  const sheets1 = tile(T + 0.05, W - T - 0.05, T + 0.05, D - T - 0.05, 2.1, 3.4, 0.12);
+  // Sheets butt tight against each other: unseamed, but with no open gap.
+  const J = 0.03, SW1 = (W - 2 * T - 0.1 - 4 * J) / 5, SD1 = (D - 2 * T - 0.1 - J) / 2;
+  const sheets1 = tile(T + 0.05, W - T - 0.05, T + 0.05, D - T - 0.05, SW1, SD1, J);
   sheets1.sort((a, b) => (a[0] + a[2]) - (b[0] + b[2]));
   sheets1.forEach((s, i) => { g += group(1, box(s[0], s[1], s[2], s[3], 0, yPad1, 'url(#ib-foam)', '#262b1d', '#1f2318'), 'b-drop', i * 70); });
 
   // 3. Drainage: droplets falling into the gaps between sheets.
   let drops = '';
   const gapXs = [];
-  for (let i = 1; i < 5; i++) gapXs.push(T + 0.05 + i * 2.1 + (i - 0.5) * 0.12);
+  for (let i = 1; i < 5; i++) gapXs.push(T + 0.05 + i * SW1 + (i - 0.5) * J);
   for (let i = 0; i < 34; i++) {
     const x = gapXs[Math.floor(r() * gapXs.length)], z = T + 0.4 + r() * (D - 2 * T - 0.8);
     const [px, py] = iso(x, yPad1, z);
     drops += `<g class="drop" style="--t:${(r() * 1.6).toFixed(2)}s"><path d="M${f(px)} ${f(py - 11)}q4.6 6.6 0 10q-4.6 -3.4 0 -10z" fill="#e8f0d8"/></g>`;
   }
   g += `<g class="b-fade drops" data-step="2" data-only="2">${drops}</g>`;
-  // Gap highlight lines.
-  let gapLines = '';
-  for (const x of gapXs) {
-    const a = iso(x, yPad1 + 0.01, T + 0.05), b = iso(x, yPad1 + 0.01, D - T - 0.05);
-    gapLines += `<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}"/>`;
-  }
-  const zMid = T + 0.05 + 3.4 + 0.06;
-  { const a = iso(T + 0.05, yPad1 + 0.01, zMid), b = iso(W - T - 0.05, yPad1 + 0.01, zMid); gapLines += `<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}"/>`; }
-  g += `<g class="b-fade gaps" data-step="2" data-only="2" stroke="#c5e04b" stroke-width="2.4" stroke-dasharray="6 6">${gapLines}</g>`;
-
   // 4. Second layer, perpendicular (3.4 × 2.1 units).
   // Cut away on the left so the first layer's direction stays visible.
-  const sheets2 = tile(4.45, W - T - 0.05, T + 0.05, D - T - 0.05, 3.4, 2.1, 0.12);
+  const sheets2 = tile(4.45, W - T - 0.05, T + 0.05, D - T - 0.05, SD1, SW1, J);
   sheets2.sort((a, b) => (a[0] + a[2]) - (b[0] + b[2]));
   sheets2.forEach((s, i) => { g += group(3, box(s[0], s[1], s[2], s[3], yPad1, yPad2, 'url(#ib-foam2)', '#2f3524', '#272c1e'), 'b-drop', i * 60); });
 

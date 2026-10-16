@@ -965,3 +965,21 @@ h1, h2 { font-family: var(--display); }
 @media (max-width: 900px) {
   .sm-build { grid-template-columns: 1fr; }
 }
+.sm-photo { aspect-ratio: 16 / 7.4; } .sm-photo img { object-position: 50% 62%; }
+
+/* ---------- Mobile fixes ---------- */
+@media (max-width: 800px) {
+  .outcome { grid-template-columns: 1fr; gap: 22px; }
+  .outcome:nth-child(even) .outcome-media { order: 0; }
+  .outcome-media { max-width: none; }
+}
+@media (max-width: 480px) {
+  .intro h2, .warranty h2, .sm-why h3, .sm-build-head h3 { font-size: clamp(1.55rem, 7.4vw, 1.9rem); }
+  .why .intro h2 br { display: none; }
+  .model-copy h3 { font-size: clamp(2.2rem, 11vw, 2.8rem); }
+  .sm-head h2 { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+}
+.sm-caption-m { display: none !important; }
+.text-link { display: inline-block; padding-block: 8px; }
+.hero .trust a { display: inline-block; padding-block: 10px; }
+input[type="range"] { height: 32px; }

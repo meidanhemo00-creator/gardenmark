@@ -50,7 +50,7 @@ export function buildSafeMark(svg) {
   const frameFront = rail(W - t, W, 0, D) + rail(0, W, D - t, D);
 
   // ShockPad: unseamed sheets with drainage gaps between them.
-  const ph = LAYERS[2].h, gap = 0.12;
+  const ph = LAYERS[2].h, gap = 0.04;
   let pad = '';
   const cols = [[t, 4.5 - gap / 2], [4.5 + gap / 2, W - t]];
   for (const [x0, x1] of cols) for (const [z0, z1] of cols) {
