@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>GardenMark Reel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/social/social.css">
+  <style>
+    .reel { width: 1080px; height: 1920px; position: relative; overflow: hidden; }
+    .layer { position: absolute; inset: 0; }
+    .hl { position: absolute; left: 72px; right: 72px; text-align: center; }
+    .hl h1 { font-size: 92px; }
+    .hl h2 { font-size: 84px; }
+    .stepline { position: absolute; left: 72px; right: 72px; top: 1330px; text-align: center; display: grid; gap: 18px; justify-items: center; }
+    .stepline .label { font-size: 26px; }
+    .stepline h2 { font-size: 64px; line-height: 1.02; text-wrap: balance; max-width: 900px; }
+    .diagram { position: absolute; left: 60px; right: 60px; top: 560px; }
+    .diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .vc { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--mono); text-transform: uppercase; letter-spacing: .14em; font-size: 18px; opacity: .6; }
+    .dots { position: absolute; top: 1280px; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; }
+    .dots i { width: 44px; height: 6px; border-radius: 6px; background: rgba(236, 234, 223, .18); }
+    .dots i.on { background: var(--lime); }
+    .sample { position: absolute; left: 0; right: 0; top: 560px; height: 760px; }
+    .sample canvas { width: 100%; height: 100%; display: block; }
+    .end { display: grid; justify-items: center; align-content: center; gap: 44px; text-align: center; padding: 0 72px; }
+    .end .mark svg { width: 130px; height: 130px; }
+    .end h2 { font-size: 92px; }
+    .facts { display: flex; gap: 40px; justify-content: center; font-family: var(--mono); text-transform: uppercase; letter-spacing: .12em; font-size: 32px; color: var(--sage); }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="gm-mark" viewBox="0 0 32 32">
+    <path fill="#8dc63f" d="M2.5,1 H9 A6 6 0 0 1 15,7 V13.5 Q15,15 13.5,15 H7 A6 6 0 0 1 1,9 V2.5 Q1,1 2.5,1 Z"/>
+    <path fill="#5da12e" d="M18.5,1 H25 A6 6 0 0 1 31,7 V13.5 Q31,15 29.5,15 H23 A6 6 0 0 1 17,9 V2.5 Q17,1 18.5,1 Z"/>
+    <path fill="#5da12e" d="M2.5,17 H9 A6 6 0 0 1 15,23 V29.5 Q15,31 13.5,31 H7 A6 6 0 0 1 1,25 V18.5 Q1,17 2.5,17 Z"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 20 20"><path d="M10 18s6-5.5 6-10a6 6 0 10-12 0c0 4.5 6 10 6 10z M10 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+<div id="root"></div>
+<script type="module">
+import { buildInstall } from '/src/safemark-build.js';
+import { renderSample, MODELS } from '/src/sample.js';
+
+const which = new URLSearchParams(location.search).get('reel');
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = (t) => 1 - Math.pow(1 - t, 3);
+const fade = (t, a, b, d = 0.35) => clamp((t - a) / d) * (1 - clamp((t - b) / d));
+const brand = '<span class="brand"><svg><use href="#gm-mark"/></svg>GardenMark<sup>®</sup></span>';
+const root = document.getElementById('root');
+const setO = (el, o, y = 0) => { el.style.opacity = o.toFixed(3); el.style.transform = `translateY(${((1 - Math.min(1, o * 1.5)) * y).toFixed(1)}px)`; };
+const endCard = (h) => `<div class="layer end" id="end"><span class="mark"><svg><use href="#gm-mark"/></svg></span><h2>${h}</h2><span class="btn"><svg><use href="#i-pin"/></svg>Find a GardenMark dealer</span><p class="mono url" style="font-size:24px">gardenmark.com</p></div>`;
+
+/* ---------------- Reel 1: SafeMark build ---------------- */
+if (which === 'safemark') {
+  const STEP = [
+    ['01 / Base', 'Compacted base. Wood frame.'],
+    ['02 / Shock pad', '40 × 60 in pad sheets.'],
+    ['03 / Drainage', 'Laid tight. Water drains through the joints.'],
+    ['04 / Second layer', 'If specified, laid the other way.'],
+    ['05 / Fixing', 'Glued to the frame. Never nailed.'],
+    ['06 / Turf', 'Montana on top. Spot-glued every 6 in.'],
+    ['07 / Infill', '3 lb of 20/40 silica sand per sq ft.'],
+  ];
+  root.innerHTML = `<section class="reel ink grid">
+    <div class="top">${brand}<span class="mono count" id="ctr"></span></div>
+    <div class="hl" id="hook" style="top:250px"><p class="label" style="margin-bottom:26px">SafeMark underlay system</p><h1>What’s under<br>a <em>playground<br>lawn?</em></h1></div>
+    <div class="diagram" id="dg"><svg viewBox="0 0 940 640"></svg><p class="vc" style="margin-top:-6px">Conceptual illustration. Not to scale.</p></div>
+    <div class="dots" id="dots">${STEP.map(() => '<i></i>').join('')}</div>
+    <div class="stepline" id="sl"><p class="label" id="sl-l"></p><h2 id="sl-h"></h2></div>
+    ${endCard('SafeMark.<br><em>The layer<br>you won’t see.</em>')}
+  </section>`;
+  const parts = buildInstall(root.querySelector('.diagram svg'));
+  const drops = [...root.querySelectorAll('.drop')];
+  const grains = [...root.querySelectorAll('.grain')];
+  const glue = root.querySelector('.glue path');
+  const T0 = 2.6, DUR = 1.75;
+  const start = (k) => T0 + k * DUR;
+  window.DURATION = T0 + STEP.length * DUR + 3.2;
+  window.renderAt = (t) => {
+    const building = t >= T0 - 0.3;
+    // Hook: full system shown, then it clears and rebuilds.
+    const hookO = 1 - clamp((t - (T0 - 0.6)) / 0.4);
+    setO(root.querySelector('#hook'), hookO * clamp(t / 0.35), 20);
+    const endStart = window.DURATION - 3.0;
+    const dgO = 1 - clamp((t - endStart) / 0.4);
+    const dg = root.querySelector('#dg');
+    dg.style.opacity = dgO.toFixed(3);
+    parts.forEach((el) => {
+      const s = Number(el.dataset.step);
+      const only = el.dataset.only !== undefined;
+      let p;
+      if (!building || t < T0) {
+        p = only ? 0 : (t < T0 - 0.7 ? 1 : clamp(1 - (t - (T0 - 0.7)) / 0.35));
+        if (el.classList.contains('b-drop')) { el.style.opacity = p; el.style.transform = 'none'; }
+        else el.style.opacity = p;
+        return;
+      }
+      const st = start(s) + (parseFloat(el.style.getPropertyValue('--d')) || 0) / 1000;
+      if (el.classList.contains('b-drop')) {
+        p = ease(clamp((t - st) / 0.7));
+        el.style.opacity = clamp((t - st) / 0.3).toFixed(3);
+        el.style.transform = `translateY(${(-80 * (1 - p)).toFixed(1)}px)`;
+      } else {
+        const on = clamp((t - start(s)) / 0.4);
+        const off = only ? 1 - clamp((t - start(s + 1) + 0.1) / 0.3) : 1;
+        el.style.opacity = (on * off).toFixed(3);
+      }
+    });
+    // Water drops falling through the joints during step 3.
+    drops.forEach((d) => {
+      const ph = ((t - start(2) + parseFloat(d.style.getPropertyValue('--t'))) % 1.2) / 1.2;
+      d.style.opacity = (ph < 0.2 ? ph / 0.2 : ph > 0.8 ? (1 - ph) / 0.2 : 1).toFixed(2);
+      d.style.transform = `translateY(${(-50 + ph * 64).toFixed(1)}px)`;
+    });
+    grains.forEach((g) => {
+      const ph = ((t - start(6) + parseFloat(g.style.getPropertyValue('--t'))) % 1.0);
+      g.style.opacity = (ph < 0.25 ? ph / 0.25 : 1 - ph).toFixed(2);
+      g.style.transform = `translateY(${(-80 + ph * 88).toFixed(1)}px)`;
+    });
+    if (glue) glue.style.strokeDashoffset = String(120 * (1 - clamp((t - start(4)) / 1.0)));
+    // Captions.
+    const k = Math.floor((t - T0) / DUR);
+    const sl = root.querySelector('#sl');
+    if (t >= T0 && k < STEP.length) {
+      root.querySelector('#sl-l').textContent = STEP[k][0];
+      root.querySelector('#sl-h').textContent = STEP[k][1];
+      const local = t - start(k);
+      setO(sl, clamp(local / 0.3) * (1 - clamp((local - DUR + 0.25) / 0.25)), 24);
+    } else sl.style.opacity = 0;
+    root.querySelectorAll('#dots i').forEach((d, i) => d.classList.toggle('on', t >= T0 && i <= k));
+    root.querySelector('#dots').style.opacity = (t >= T0 - 0.2 ? dgO : 0).toFixed(3);
+    root.querySelector('#ctr').textContent = t >= T0 && k < STEP.length ? `Step ${String(k + 1).padStart(2, '0')}` : '';
+    setO(root.querySelector('#end'), clamp((t - endStart - 0.2) / 0.5), 30);
+  };
+}
+
+/* ---------------- Reel 2: Which one is your yard? ---------------- */
+if (which === 'models') {
+  const M = [
+    ['montana', 'Montana', 'The natural mix.', ['1.75 in', 'Brown thatch']],
+    ['kentucky', 'Kentucky', 'The richer green.', ['1.75 in', 'Green thatch']],
+    ['augusta', 'Augusta', 'The short game.', ['0.70 in', 'Putting']],
+    ['canine', 'Canine', 'The pet-ready yard.', ['1 in', 'Pets & play']],
+  ];
+  root.innerHTML = `<section class="reel dark">
+    <div class="top">${brand}<span class="mono count" id="ctr"></span></div>
+    <div class="hl" id="hook" style="top:250px"><h1>Four surfaces.<br><em>Which one<br>is your yard?</em></h1></div>
+    <div class="hl" id="name" style="top:250px"><p class="label" id="n-l" style="margin-bottom:22px"></p><h1 id="n-h" style="font-size:124px"></h1><p class="body" id="n-p" style="margin:22px auto 0;font-size:54px;color:var(--on-dark);font-weight:500"></p></div>
+    <div class="sample" id="smp"><canvas></canvas><p class="vc" style="bottom:-6px">Rendered illustration. Not a photograph.</p></div>
+    <div class="stepline" id="facts" style="top:1350px"><div class="facts" id="f"></div></div>
+    ${endCard('Comment<br>your pick.<br><em>Find it near you.</em>')}
+  </section>`;
+  const canvas = root.querySelector('canvas');
+  const HOOK = 2.6, PER = 2.6;
+  window.DURATION = HOOK + M.length * PER + 3.0;
+  window.renderAt = (t) => {
+    setO(root.querySelector('#hook'), clamp(t / 0.3) * (1 - clamp((t - HOOK + 0.35) / 0.3)), 20);
+    const endStart = window.DURATION - 3.0;
+    const k = Math.min(M.length - 1, Math.max(0, Math.floor((t - HOOK) / PER)));
+    const [key, name, line, facts] = M[t < HOOK ? 0 : k];
+    const local = t < HOOK ? 0 : t - HOOK - k * PER;
+    const showName = t >= HOOK && t < endStart;
+    const nameO = showName ? clamp(local / 0.3) * (1 - clamp((local - PER + 0.25) / 0.25)) : 0;
+    root.querySelector('#n-l').textContent = `${String(k + 1).padStart(2, '0')} / 04`;
+    root.querySelector('#n-h').textContent = name;
+    root.querySelector('#n-p').textContent = line;
+    setO(root.querySelector('#name'), nameO, 24);
+    root.querySelector('#f').innerHTML = facts.map((x) => `<span>${x}</span>`).join('<span style="opacity:.4">/</span>');
+    setO(root.querySelector('#facts'), nameO, 16);
+    const smpO = (1 - clamp((t - endStart) / 0.4)) * (t < HOOK ? clamp(t / 0.5) : (local < 0.25 ? 0.25 + local * 3 : 1) * (local > PER - 0.2 ? Math.max(0.25, (PER - local) * 5) : 1));
+    root.querySelector('#smp').style.opacity = clamp(smpO).toFixed(3);
+    const yaw = -30 + (t < HOOK ? t : local) * 26;
+    renderSample(canvas, key, { yaw, pitch: key === 'augusta' ? 30 : 24, width: 10, depth: 8, padX: 0.015, padY: 0.06, dof: 2.8, seed: 31, pitchRange: [20, 34] });
+    root.querySelector('#ctr').textContent = '';
+    setO(root.querySelector('#end'), clamp((t - endStart - 0.2) / 0.5), 30);
+  };
+}
+
+await document.fonts.ready;
+document.querySelectorAll('h1, h2').forEach((h) => {
+  if (!h.innerHTML.includes('<br')) return;
+  h.style.whiteSpace = 'nowrap'; h.style.width = 'max-content'; h.style.marginInline = 'auto';
+  let fs = parseFloat(getComputedStyle(h).fontSize);
+  while (h.getBoundingClientRect().width > 1080 - 160 && fs > 40) { fs -= 2; h.style.fontSize = fs + 'px'; }
+});
+window.renderAt(0);
+window.__ready = true;
+</script>
+</body>
+</html>

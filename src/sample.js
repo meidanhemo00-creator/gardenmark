@@ -53,11 +53,11 @@ function geometry(key, SW, SD, seed) {
   const thatch = [];
   if (m.thatch) {
     const tc = hex(m.thatch);
-    for (let i = 0; i < SW * SD * 34; i++) {
+    for (let i = 0; i < SW * SD * 58; i++) {
       // Bias part of the thatch toward the four cut edges so it reads from any angle.
       let x = L + 0.15 + r() * (SW - 0.3), z = F + 0.12 + r() * (SD - 0.24);
-      if (r() < 0.45) {
-        const e = Math.floor(r() * 4), d = 0.12 + r() * 0.5;
+      if (r() < 0.12) {
+        const e = Math.floor(r() * 4), d = 0.45 + r() * 0.6;
         if (e === 0) z = F + d; else if (e === 1) z = F + SD - d; else if (e === 2) x = L + d; else x = L + SW - d;
       }
       thatch.push({
@@ -232,9 +232,9 @@ export function renderSample(canvas, key, opts = {}) {
       o.fill();
     } else if (it.t === 1) {
       const t = it.d;
-      const s = ppi(it.z) * 0.07;
+      const s = ppi(it.z) * 0.06;
       o.strokeStyle = rgb(mix(t.c, SHADE, depthK * 0.4), 0.9);
-      o.lineWidth = Math.max(0.7, ppi(it.z) * 0.024);
+      o.lineWidth = Math.max(0.7, ppi(it.z) * 0.021);
       o.beginPath();
       let [px, py] = it.p;
       o.moveTo(px, py);
@@ -242,7 +242,7 @@ export function renderSample(canvas, key, opts = {}) {
       for (let k = 0; k < t.n; k++) {
         const side = k % 2 ? 1 : -1;
         const nx2 = px + ca * s, ny2 = py + sa * s;
-        o.quadraticCurveTo(px + ca * s / 2 - sa * s * 0.8 * side, py + sa * s / 2 + ca * s * 0.5 * side, nx2, ny2);
+        o.quadraticCurveTo(px + ca * s / 2 - sa * s * 0.55 * side, py + sa * s / 2 + ca * s * 0.38 * side, nx2, ny2);
         px = nx2; py = ny2;
       }
       o.stroke();
