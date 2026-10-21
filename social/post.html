@@ -31,79 +31,64 @@ const theme = sl.theme || (sl.layout === 'cta' && post.theme === 'light' ? 'dark
 const brand = '<span class="brand"><svg><use href="#gm-mark"/></svg>GardenMark<sup>®</sup></span>';
 const pad = (n) => String(n).padStart(2, '0');
 
-function visual(v) {
+function visual(v, cls) {
   if (!v) return '';
-  if (v.type === 'sample') return `<div class="visual"><canvas data-model="${v.model}"></canvas><span class="vcap">Rendered illustration. Not a photograph.</span>${v.swatches ? `<div style="position:absolute;right:72px;bottom:10px;display:flex;gap:22px;align-items:center"><div class="swatches">${MODELS[v.model].greens.map((c) => `<i style="background:${c}"></i>`).join('')}</div></div>` : ''}</div>`;
-  if (v.type === 'weeks') {
-    const mo = ['J','F','M','A','M','J','J','A','S','O','N','D'];
-    return `<div class="visual weeksv" style="display:grid;place-items:center;align-content:center;gap:22px"><div class="weeks">${Array.from({ length: 52 }, (_, k) => `<i class="${k >= 12 && k < 43 ? 'mow' : ''}"></i>`).join('')}</div><div style="display:flex;gap:28px;align-items:center" class="mono"><span style="display:inline-flex;gap:10px;align-items:center;font-size:20px;color:#50533f"><i style="width:22px;height:22px;border-radius:4px;background:#8a7a4e;display:inline-block"></i>A typical mowing season</span></div></div>`;
-  }
+  if (v.type === 'sample') return `<div class="visual ${cls}"><canvas data-model="${v.model}"></canvas><span class="vcap">Rendered illustration. Not a photograph.</span></div>`;
+  if (v.type === 'weeks') return `<div class="visual"><div class="weeks">${Array.from({ length: 52 }, (_, k) => `<i class="${k >= 13 && k < 44 ? 'mow' : ''}"></i>`).join('')}</div><p class="legend"><i></i>A typical mowing season</p></div>`;
   if (v.type === 'scale') {
     const order = ['montana', 'kentucky', 'augusta', 'canine'];
-    return `<div class="visual" style="display:flex;align-items:flex-end;padding-bottom:20px"><div class="scale" style="width:100%">${order.map((k) => `<div class="bar ${v.on.includes(k) ? 'on' : ''}"><i style="height:${(MODELS[k].pile / 1.75) * 100 * 0.78}%"></i><b>${k[0].toUpperCase() + k.slice(1)}</b><span>${MODELS[k].pile === 0.7 ? '0.70' : MODELS[k].pile} IN</span></div>`).join('')}</div></div>`;
+    return `<div class="visual"><div class="scale">${order.map((k) => `<div class="bar ${v.on.includes(k) ? 'on' : ''}"><i style="height:${(MODELS[k].pile / 1.75) * 76}%"></i><b>${k[0].toUpperCase() + k.slice(1)}</b><span>${MODELS[k].pile === 0.7 ? '0.70' : MODELS[k].pile} IN</span></div>`).join('')}</div></div>`;
   }
   if (v.type === 'paws') {
     let s = '';
-    const steps = 9;
-    for (let k = 0; k < steps; k++) {
-      const x = 120 + k * 100, y = 640 - k * 64 + (k % 2 ? 50 : -10);
-      if (k > 5) break;
-      s += `<svg style="position:absolute;left:${x - 60}px;top:${y - 260}px;width:78px;height:78px;transform:rotate(${28 + (k % 2 ? 10 : -6)}deg);color:#7a6440;opacity:${(0.95 - k * 0.15).toFixed(2)}"><use href="#paw" fill="currentColor"/></svg>`;
+    for (let k = 0; k < 6; k++) {
+      const x = 110 + k * 78, y = 250 - k * 26 + (k % 2 ? 40 : 0);
+      s += `<svg style="position:absolute;left:${x}px;top:${y - 120}px;width:70px;height:70px;transform:rotate(${28 + (k % 2 ? 10 : -6)}deg);color:#7a6440;opacity:${(0.95 - k * 0.14).toFixed(2)}"><use href="#paw" fill="currentColor"/></svg>`;
     }
-    return `<div class="visual paw-trail">${s}<canvas data-model="canine" style="top:auto;bottom:-40px;height:520px"></canvas><span class="vcap">Rendered illustration. Not a photograph.</span></div>`;
+    return `<div class="visual v-paws">${s}<canvas data-model="canine" style="top:auto;bottom:0;height:470px"></canvas><span class="vcap">Rendered illustration. Not a photograph.</span></div>`;
   }
   if (v.type === 'stack') {
-    const layers = [['Turf', '#4f6f27', '#eceadf'], ['WeedMark fabric', '#2a2d22', '#b6b6a0'], ['1–2 in stone dust or concrete sand', '#cbbf96', '#191c12'], ['3–4 in ¾ in crushed stone', '#8a876f', '#191c12'], ['Compacted, sloped base', '#5c5a48', '#eceadf']];
-    return `<div class="stack">${layers.map(([t, bg, fg], k) => `<div style="background:${bg};color:${fg};height:${k === 3 ? 110 : k === 2 ? 70 : 62}px">${t}</div>`).join('')}</div>`;
+    const layers = [['Turf', '#4f6f27', '#eceadf', 58], ['WeedMark fabric', '#2a2d22', '#b6b6a0', 58], ['1–2 in stone dust or concrete sand', '#cbbf96', '#191c12', 66], ['3–4 in of 3/4 in crushed stone', '#8a876f', '#191c12', 100], ['Compacted, sloped base', '#5c5a48', '#eceadf', 58]];
+    return `<div class="stack">${layers.map(([t, bg, fg, h]) => `<div style="background:${bg};color:${fg};height:${h}px">${t}</div>`).join('')}</div>`;
   }
   return '';
 }
 
-let inner = '';
 const L = sl.layout;
-if (L === 'hook' || L === 'split') {
-  const c = `<div class="copy ${L === 'hook' ? 'center' : ''}">${sl.label ? `<p class="label">${sl.label}</p>` : ''}<${L === 'hook' ? 'h1' : 'h2'}>${sl.h}</${L === 'hook' ? 'h1' : 'h2'}>${sl.body ? `<p class="body">${sl.body}</p>` : ''}</div>`;
-  inner = L === 'hook' ? c + visual(sl.visual) : visual(sl.visual) + c;
-} else if (L === 'photo') {
-  inner = `<div class="photo"><img src="${sl.src}" alt=""><span class="tag">GardenMark project</span></div><div class="copy"><h2>${sl.h}</h2><p class="body">${sl.body}</p></div>`;
-} else if (L === 'text') {
-  inner = `<div class="copy">${sl.label ? `<p class="label">${sl.label}</p>` : ''}<h1 style="font-size:96px">${sl.h}</h1>${sl.body ? `<p class="body">${sl.body}</p>` : ''}</div>`;
-} else if (L === 'q') {
-  inner = `<div class="copy" style="gap:36px">${'<p class="qnum">' + sl.n + '</p>'}<h2>${sl.h}</h2><p class="body">${sl.body}</p>${sl.visual ? visual(sl.visual) : ''}</div>`;
-} else if (L === 'list') {
-  inner = `<div class="copy" style="gap:40px"><p class="label">${sl.label}</p><h1 style="font-size:96px">${sl.h}</h1><ul class="list">${sl.items.map((t, k) => `<li><b>${pad(k + 1)}</b>${t}</li>`).join('')}</ul></div>`;
-} else if (L === 'cta') {
-  inner = `<div class="copy"><span class="mark"><svg><use href="#gm-mark"/></svg></span><h2 style="font-size:76px">${sl.h}</h2><span class="btn"><svg><use href="#i-pin"/></svg>Find a GardenMark dealer</span><p class="mono url" style="font-size:24px">gardenmark.com</p></div>`;
-}
+const label = sl.label ? `<p class="label">${sl.label}</p>` : '';
+const body = sl.body ? `<p class="body">${sl.body}</p>` : '';
+const chips = sl.visual && sl.visual.swatches ? `<div class="chips">${MODELS[sl.visual.model].greens.map((c, k) => `<div><i style="background:${c}"></i>${['Deep', 'Mid', 'Light'][k]}</div>`).join('')}</div>` : '';
+let inner = '';
+if (L === 'hook') inner = `<div class="copy center">${label}<h1>${sl.h}</h1>${body}</div>${visual(sl.visual, 'v-hook')}`;
+else if (L === 'split') inner = `${visual(sl.visual, 'v-split')}<div class="copy">${label}<h2>${sl.h}</h2>${body}${chips}</div>`;
+else if (L === 'photo') inner = `<div class="photo"><img src="${sl.src}" alt=""><span class="tag">GardenMark project</span></div><div class="copy"><h2>${sl.h}</h2>${body}</div>`;
+else if (L === 'text') inner = `<div class="copy">${label}<h1>${sl.h}</h1>${body}</div>`;
+else if (L === 'q') inner = `<div class="copy"><p class="qnum">${sl.n}</p><h2>${sl.h}</h2>${body}${sl.visual && sl.visual.type === 'stack' ? visual(sl.visual) : ''}</div>${sl.visual && sl.visual.type === 'sample' ? visual(sl.visual, 'v-q') : ''}<div class="qprog"><span class="mono">Question ${Number(sl.n)} of 5</span><div>${[1,2,3,4,5].map(k => `<i class="${k <= Number(sl.n) ? 'on' : ''}"></i>`).join('')}</div></div>`;
+else if (L === 'list') inner = `<div class="copy">${label}<h1>${sl.h}</h1><ul class="list">${sl.items.map((t, k) => `<li><b>${pad(k + 1)}</b>${t}</li>`).join('')}</ul></div>`;
+else if (L === 'cta') inner = `<div class="copy"><span class="mark"><svg><use href="#gm-mark"/></svg></span><h2>${sl.h}</h2><span class="btn"><svg><use href="#i-pin"/></svg>Find a GardenMark dealer</span><p class="mono url">gardenmark.com</p></div>`;
 
-const layoutClass = { hook: 'l-hook', split: 'l-split', photo: 'l-photo', text: 'l-text', q: 'l-text', list: 'l-text', cta: 'l-cta' }[L];
 const swipe = (i === 0 || sl.swipe) && i < total - 1;
-document.getElementById('root').innerHTML = `<section class="slide ${theme} ${layoutClass}">
+document.getElementById('root').innerHTML = `<section class="slide ${theme} l-${L}">
   <div class="top">${L === 'cta' ? '<span></span>' : brand}<span class="mono count">${pad(i + 1)} / ${pad(total)}</span></div>
-  ${inner}
+  <div class="stage">${inner}</div>
   <div class="bottom"><span class="mono url">${L === 'cta' ? '' : 'gardenmark.com'}</span>${swipe ? '<span class="mono swipe">Swipe<i></i></span>' : '<span></span>'}</div>
 </section>`;
 
 await document.fonts.ready;
-// Hand-set headline breaks: each line stays whole; shrink the size until the longest line fits.
+// Headlines keep their hand-set lines. Report (don't silently shrink) any line that would overflow.
+window.__shrunk = [];
 document.querySelectorAll('h1, h2').forEach((h) => {
-  if (!h.innerHTML.includes('<br')) return;
-  h.style.whiteSpace = 'nowrap';
-  h.style.textWrap = 'nowrap';
-  h.style.width = 'max-content';
-  const max = 1080 - 2 * 72 - 8; // slide width minus the side margins
-  let fs = parseFloat(getComputedStyle(h).fontSize);
-  while (h.getBoundingClientRect().width > max && fs > 40) { fs -= 2; h.style.fontSize = fs + 'px'; }
+  const max = 1080 - 160;
+  let fs = parseFloat(getComputedStyle(h).fontSize); const start = fs;
+  while (h.scrollWidth > max && fs > 40) { fs -= 2; h.style.fontSize = fs + 'px'; }
+  if (fs !== start) window.__shrunk.push(`${h.textContent.slice(0, 30)} ${start}->${fs}`);
 });
-const c = document.querySelector('canvas');
-if (c && sl.visual.type === 'paws') {
-  renderSample(c, 'canine', { yaw: -14, pitch: 22, width: 14, depth: 8, padX: 0.02, padY: 0.04, dof: 2.4, seed: 21 });
-} else if (c) {
+const SOPTS = { padX: 0.085, padY: 0.06, dof: 2.8, seed: 21 };
+document.querySelectorAll('canvas').forEach((c) => {
   const v = sl.visual;
-  renderSample(c, v.model, v.zoom
-    ? { yaw: v.yaw, pitch: v.pitch, width: 5, depth: 4, padX: -0.25, padY: -0.15, dof: 4, focus: 0.1, seed: 21 }
-    : { yaw: v.yaw, pitch: v.pitch, width: 12, depth: 9, padX: 0.03, padY: 0.03, dof: 3, seed: 21 });
-}
+  if (v.type === 'paws') renderSample(c, 'canine', { ...SOPTS, yaw: -14, pitch: 22, width: 14, depth: 8 });
+  else renderSample(c, v.model, { ...SOPTS, yaw: v.yaw, pitch: v.pitch, width: 12, depth: 9 });
+});
 window.__ready = true;
 </script>
 </body>

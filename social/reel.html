@@ -55,13 +55,13 @@ const endCard = (h) => `<div class="layer end" id="end"><span class="mark"><svg>
 /* ---------------- Reel 1: SafeMark build ---------------- */
 if (which === 'safemark') {
   const STEP = [
-    ['01 / Base', 'Compacted base. Wood frame.'],
-    ['02 / Shock pad', '40 × 60 in pad sheets.'],
-    ['03 / Drainage', 'Laid tight. Water drains through the joints.'],
-    ['04 / Second layer', 'If specified, laid the other way.'],
-    ['05 / Fixing', 'Glued to the frame. Never nailed.'],
-    ['06 / Turf', 'Montana on top. Spot-glued every 6 in.'],
-    ['07 / Infill', '3 lb of 20/40 silica sand per sq ft.'],
+    ['01 / Base', 'Compacted base.<br>Wood frame.'],
+    ['02 / Shock pad', '40 × 60 in<br>pad sheets.'],
+    ['03 / Drainage', 'Laid tight.<br>Water drains<br>through the joints.'],
+    ['04 / Second layer', 'If specified,<br>laid the<br>other way.'],
+    ['05 / Fixing', 'Glued to<br>the frame.<br>Never nailed.'],
+    ['06 / Turf', 'Montana on top.<br>Spot-glued<br>every 6 in.'],
+    ['07 / Infill', '3 lb of 20/40<br>silica sand<br>per sq ft.'],
   ];
   root.innerHTML = `<section class="reel ink grid">
     <div class="top">${brand}<span class="mono count" id="ctr"></span></div>
@@ -75,18 +75,30 @@ if (which === 'safemark') {
   const drops = [...root.querySelectorAll('.drop')];
   const grains = [...root.querySelectorAll('.grain')];
   const glue = root.querySelector('.glue path');
-  const T0 = 2.6, DUR = 1.75;
-  const start = (k) => T0 + k * DUR;
-  window.DURATION = T0 + STEP.length * DUR + 3.2;
+  // Timed to the music (120 BPM, 0.5 s per beat) and to the voiceover line lengths.
+  const BEAT = 0.5, T0 = 4.0;
+  const STEP_BEATS = [5, 4, 7, 5, 4, 4, 3];
+  const STARTS = [T0]; STEP_BEATS.forEach((b) => STARTS.push(STARTS[STARTS.length - 1] + b * BEAT));
+  const start = (k) => STARTS[Math.min(k, STARTS.length - 1)];
+  window.TIMELINE = { T0, STARTS, END: STARTS[7] };
+  window.DURATION = STARTS[7] + 4.0;
+  {
+    const h = root.querySelector('#sl-h'); h.style.whiteSpace = 'nowrap'; h.style.width = 'max-content'; h.style.maxWidth = 'none';
+    let fs = 64;
+    for (const st of STEP) { h.innerHTML = st[1]; while (h.getBoundingClientRect().width > 900 && fs > 36) { fs -= 2; h.style.fontSize = fs + 'px'; } }
+    h.style.fontSize = fs + 'px'; window.__capSize = fs;
+  }
   window.renderAt = (t) => {
     const building = t >= T0 - 0.3;
     // Hook: full system shown, then it clears and rebuilds.
     const hookO = 1 - clamp((t - (T0 - 0.6)) / 0.4);
     setO(root.querySelector('#hook'), hookO * clamp(t / 0.35), 20);
-    const endStart = window.DURATION - 3.0;
+    const endStart = STARTS[7];
     const dgO = 1 - clamp((t - endStart) / 0.4);
     const dg = root.querySelector('#dg');
     dg.style.opacity = dgO.toFixed(3);
+    const ph = t >= T0 && t < endStart ? ((t - T0) % BEAT) : 9;
+    dg.style.transform = `scale(${(1 + 0.012 * Math.exp(-ph * 9)).toFixed(4)})`;
     parts.forEach((el) => {
       const s = Number(el.dataset.step);
       const only = el.dataset.only !== undefined;
@@ -121,17 +133,18 @@ if (which === 'safemark') {
     });
     if (glue) glue.style.strokeDashoffset = String(120 * (1 - clamp((t - start(4)) / 1.0)));
     // Captions.
-    const k = Math.floor((t - T0) / DUR);
+    let k = -1; for (let j = 0; j < 7; j++) if (t >= STARTS[j]) k = j;
+    const DUR = k >= 0 ? STARTS[k + 1] - STARTS[k] : 1;
     const sl = root.querySelector('#sl');
-    if (t >= T0 && k < STEP.length) {
+    if (t >= T0 && t < endStart && k >= 0) {
       root.querySelector('#sl-l').textContent = STEP[k][0];
-      root.querySelector('#sl-h').textContent = STEP[k][1];
+      root.querySelector('#sl-h').innerHTML = STEP[k][1];
       const local = t - start(k);
       setO(sl, clamp(local / 0.3) * (1 - clamp((local - DUR + 0.25) / 0.25)), 24);
     } else sl.style.opacity = 0;
     root.querySelectorAll('#dots i').forEach((d, i) => d.classList.toggle('on', t >= T0 && i <= k));
     root.querySelector('#dots').style.opacity = (t >= T0 - 0.2 ? dgO : 0).toFixed(3);
-    root.querySelector('#ctr').textContent = t >= T0 && k < STEP.length ? `Step ${String(k + 1).padStart(2, '0')}` : '';
+    root.querySelector('#ctr').textContent = t >= T0 && t < endStart && k >= 0 ? `Step ${String(k + 1).padStart(2, '0')}` : '';
     setO(root.querySelector('#end'), clamp((t - endStart - 0.2) / 0.5), 30);
   };
 }
@@ -153,11 +166,13 @@ if (which === 'models') {
     ${endCard('Comment<br>your pick.<br><em>Find it near you.</em>')}
   </section>`;
   const canvas = root.querySelector('canvas');
-  const HOOK = 2.6, PER = 2.6;
-  window.DURATION = HOOK + M.length * PER + 3.0;
+  // 116 BPM: hook 8 beats, each model 6 beats, end card 8 beats.
+  const BEAT = 60 / 116, HOOK = 8 * BEAT, PER = 6 * BEAT;
+  window.TIMELINE = { HOOK, PER, END: HOOK + 4 * PER };
+  window.DURATION = HOOK + M.length * PER + 8 * BEAT;
   window.renderAt = (t) => {
     setO(root.querySelector('#hook'), clamp(t / 0.3) * (1 - clamp((t - HOOK + 0.35) / 0.3)), 20);
-    const endStart = window.DURATION - 3.0;
+    const endStart = HOOK + M.length * PER;
     const k = Math.min(M.length - 1, Math.max(0, Math.floor((t - HOOK) / PER)));
     const [key, name, line, facts] = M[t < HOOK ? 0 : k];
     const local = t < HOOK ? 0 : t - HOOK - k * PER;
