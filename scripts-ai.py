@@ -3,17 +3,14 @@ import os, numpy as np
 from PIL import Image, ImageFilter
 SRC, OUT = 'public/img/ai/', 'public/img/ai/web/'
 os.makedirs(OUT, exist_ok=True)
-def grade(im, seed=7):
-    # Photographic, not AI-smooth: clear the haze, real blacks, an S-curve, a touch of sharpening and fine grain.
-    im = im.filter(ImageFilter.UnsharpMask(radius=2.2, percent=35, threshold=2))
-    a = np.asarray(im).astype(np.float32) / 255
-    lo = np.percentile(a, 0.6, axis=(0, 1)); hi = np.percentile(a, 99.7, axis=(0, 1))
-    a = np.clip((a - lo) / (hi - lo), 0, 1)
-    a = np.clip(a + .5 * a * (1 - a) * (a - .5), 0, 1) ** 1.02
-    lum = a.mean(2, keepdims=True); a = lum + (a - lum) * 1.1
-    a[..., 0] *= .99; a[..., 2] *= 1.01
-    g = np.random.default_rng(seed).normal(0, .009, a.shape[:2])[..., None]
-    a = a + g * (1 - np.abs(a - .5))
+def grade(im):
+    # Same look as the Instagram posts: brightness .9, saturate 1.2 (CSS filter math).
+    a = np.asarray(im).astype(np.float32) / 255 * .9
+    sat = 1.2
+    M = np.array([[.213 + .787 * sat, .715 - .715 * sat, .072 - .072 * sat],
+                  [.213 - .213 * sat, .715 + .285 * sat, .072 - .072 * sat],
+                  [.213 - .213 * sat, .715 - .715 * sat, .072 + .928 * sat]], np.float32)
+    a = a @ M.T
     return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
 JOBS = {  # name: (file, centre y as fraction, aspect w/h, output widths)
   'family-wide':   ('family.jpg',   .50, 16/9, (1856, 1200)),
