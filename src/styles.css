@@ -1088,3 +1088,27 @@ input[type="range"] { height: 32px; }
   .hero-photos .hero-photo { display: none; }
   .hero-home img { aspect-ratio: 1.1; }
 }
+
+/* Every part of the yard: natural grass next to GardenMark */
+.vs { margin-top: clamp(80px, 10vw, 140px); border-top: 1px solid var(--line); padding-top: 40px; }
+.vs h3 { font-size: var(--step-2); margin-bottom: 8px; }
+.vs .sub { color: var(--ink-2); margin-bottom: 24px; }
+.vs-table { width: 100%; border-collapse: collapse; font-size: .97rem; }
+.vs-table th, .vs-table td { text-align: left; vertical-align: top; padding: 16px 18px 16px 0; border-top: 1px solid var(--line); }
+.vs-table thead th { font-family: var(--mono); font-weight: 500; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); border-top: 0; padding-bottom: 10px; }
+.vs-table thead th:last-child { color: var(--leaf-ink); }
+.vs-table tbody th { font-weight: 600; width: 26%; }
+.vs-table td { color: var(--ink-2); width: 37%; }
+.vs-table td:last-child { color: var(--charcoal); font-weight: 500; padding-left: 18px; border-left: 2px solid var(--sage); background: rgba(175, 168, 87, .08); }
+@media (max-width: 700px) {
+  .vs-table thead { display: none; }
+  .vs-table, .vs-table tbody, .vs-table tr, .vs-table th, .vs-table td { display: block; width: auto; }
+  .vs-table tr { border-top: 1px solid var(--line); padding: 14px 0; }
+  .vs-table tbody th, .vs-table td { border: 0; padding: 0; }
+  .vs-table tbody th { margin-bottom: 8px; }
+  .vs-table td::before { display: block; font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .vs-table td:first-of-type::before { content: "Natural grass"; color: var(--ink-2); }
+  .vs-table td:last-child { margin-top: 10px; padding: 10px 12px; border-left: 2px solid var(--sage); }
+  .vs-table td:last-child::before { content: "GardenMark"; color: var(--leaf-ink); }
+}
+@media (max-width: 700px) { .vs-table tbody th, .vs-table td { width: auto; } }
