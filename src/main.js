@@ -26,38 +26,7 @@ $('.site-header .menu-btn').addEventListener('click', () => mnav.showModal());
 $('[data-close]', mnav).addEventListener('click', () => mnav.close());
 $$('a', mnav).forEach((a) => a.addEventListener('click', () => mnav.close()));
 
-/* ---------- Hero: rendered Montana sample with pinned labels ---------- */
-const heroStage = $('.hero-stage');
-const heroCanvas = $('.hero-stage canvas');
-function paintHero() {
-  const mobile = window.innerWidth < 760;
-  const anchors = renderSample(heroCanvas, 'montana', mobile
-    ? { yaw: -14, camH: 12, camD: 20, padX: 0.1, padY: 0.1, dof: 2.4, seed: 3, width: 11, depth: 8 }
-    : { yaw: -17, camH: 10.5, camD: 23, padX: 0.17, padY: 0.04, dof: 2.4, seed: 3, width: 14, depth: 8 });
-  if (!anchors) return;
-  const place = (name, pt) => {
-    const el = $(`.hl[data-anchor="${name}"]`, heroStage);
-    if (el) { el.style.left = `${pt[0]}px`; el.style.top = `${pt[1]}px`; }
-  };
-  place('tip', anchors.tip);
-  place('thatch', anchors.thatch);
-  place('edge', anchors.edge);
-  heroStage.classList.add('is-drawn');
-}
-document.fonts?.ready.then(paintHero) ?? paintHero();
-let heroTimer;
-window.addEventListener('resize', () => { clearTimeout(heroTimer); heroTimer = setTimeout(paintHero, 200); });
-// Gentle parallax as the hero scrolls away.
-let heroTick = false;
-window.addEventListener('scroll', () => {
-  if (reduceMotion.matches || heroTick) return;
-  heroTick = true;
-  requestAnimationFrame(() => {
-    heroTick = false;
-    const y = window.scrollY;
-    if (y < window.innerHeight * 1.2) heroStage.style.transform = `translateY(${(-y * 0.06).toFixed(1)}px)`;
-  });
-}, { passive: true });
+/* ---------- Hero: the studio photo is plain HTML, no script needed ---------- */
 
 /* ---------- Tabs (ARIA, arrow keys) ---------- */
 function initTabs(list, onChange) {
@@ -91,7 +60,6 @@ function initTabs(list, onChange) {
   });
   return select;
 }
-initTabs($('[data-tabs="spaces"]'));
 
 /* ---------- Products: flagship panels ---------- */
 const productsSec = $('#products');
