@@ -830,7 +830,6 @@ h1, h2 { font-family: var(--display); }
   background: radial-gradient(80% 70% at 45% 36%, rgba(236, 234, 223, .07), rgba(236, 234, 223, 0) 70%), var(--forest-deep);
   box-shadow: 0 50px 90px -50px rgba(0, 0, 0, .8), inset 0 0 0 1px rgba(236, 234, 223, .06);
 }
-.model-visual .sample-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .model-visual .cap-mono { position: absolute; left: 18px; bottom: 16px; right: 160px; margin: 0; font-size: .6rem; }
 .model-photo { right: 14px; bottom: 14px; width: 128px; border-radius: 6px; box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .8); }
 .model-photo span { font-size: .55rem; border-radius: 3px; padding: 4px 6px; background: var(--leaf); color: var(--forest-deep); }
@@ -908,19 +907,6 @@ h1, h2 { font-family: var(--display); }
   .ledger > div, .ledger > div + div { grid-row: auto; display: block; margin-top: 0; }
 }
 .why .intro { max-width: 900px; }
-
-/* Rotatable product samples */
-.model-visual { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.model-visual.dragging { cursor: grabbing; }
-.model-visual:focus-visible { outline: 2px solid var(--leaf); outline-offset: 4px; }
-.rotate-hint {
-  position: absolute; top: 16px; left: 50%; translate: -50% 0; display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); text-transform: uppercase; letter-spacing: .12em; font-size: .62rem; font-weight: 500;
-  color: var(--on-dark-2); text-shadow: 0 1px 4px rgba(10, 12, 6, .9);
-  pointer-events: none; transition: opacity .4s ease, translate .4s var(--ease-out);
-}
-.rotate-hint svg { width: 14px; height: 14px; color: var(--leaf); }
-.model-visual.rotated .rotate-hint { opacity: 0; translate: -50% -6px; }
 
 /* ---------- SafeMark installation sequence ---------- */
 .sm-build { grid-column: 1 / -1; display: grid; grid-template-columns: 1.55fr 1fr; gap: 12px clamp(24px, 4vw, 56px); align-items: center; border-top: 1px solid var(--line-dark); padding-top: clamp(40px, 6vw, 72px); }
@@ -1112,3 +1098,22 @@ input[type="range"] { height: 32px; }
   .vs-table td:last-child::before { content: "GardenMark"; color: var(--leaf-ink); }
 }
 @media (max-width: 700px) { .vs-table tbody th, .vs-table td { width: auto; } }
+
+/* Spec card: products with no studio photo yet. Type and color only, no fake picture. */
+.model-visual.spec-card {
+  display: flex; flex-direction: column; gap: 0; padding: clamp(20px, 3vw, 36px);
+  background: var(--grain-d), linear-gradient(in oklab 160deg, var(--moss) 0%, var(--forest) 70%);
+  color: var(--on-dark); box-shadow: inset 0 0 0 1px rgba(236, 234, 223, .08);
+}
+.sc-head { display: flex; justify-content: space-between; margin: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line-dark); font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sage); }
+.sc-num { margin: auto 0 0; font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: clamp(5rem, 3rem + 9vw, 11rem); line-height: .85; letter-spacing: -.05em; color: var(--linen); }
+.sc-num span { font-weight: 650; color: var(--sage); letter-spacing: 0; }
+.sc-sub { margin: 10px 0 0; font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--on-dark-2); }
+.sc-swatches { list-style: none; margin: auto 0 0; padding: 22px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.sc-swatches li { display: grid; gap: 6px; min-width: 0; }
+.sc-swatches i { display: block; height: 44px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(236, 234, 223, .12); }
+.sc-swatches span { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-2); overflow-wrap: anywhere; }
+.sc-facts { list-style: none; margin: 18px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-dark); display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--linen); }
+.sc-facts li::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; background: var(--sage); vertical-align: 1px; }
+.sc-note { margin: 12px 0 0; font-size: .78rem; color: var(--on-dark-2); }
+@media (max-width: 900px) { .model-visual.spec-card { aspect-ratio: auto; min-height: 380px; } }

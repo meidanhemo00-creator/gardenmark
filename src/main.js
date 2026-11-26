@@ -1,4 +1,3 @@
-import { renderSample } from './sample.js';
 import { buildSafeMark, layerOffsets } from './safemark.js';
 import { buildInstall } from './safemark-build.js';
 
@@ -64,87 +63,6 @@ function initTabs(list, onChange) {
 /* ---------- Products: flagship panels ---------- */
 const productsSec = $('#products');
 const pileItems = $$('.pile-scale li');
-// Each product sample can be orbited: drag (mouse or touch), arrow keys, double-click to reset.
-const SAMPLE_OPTS = {
-  montana: { yaw: -26, pitch: 32, seed: 11 },
-  kentucky: { yaw: -26, pitch: 32, seed: 12 },
-  dakota: { yaw: -26, pitch: 32, seed: 15 },
-  augusta: { yaw: -30, pitch: 36, seed: 13 },
-  canine: { yaw: -22, pitch: 32, seed: 14 },
-};
-const PITCH_RANGE = [8, 78];
-const orbit = new Map(); // canvas -> { yaw, pitch }
-function drawModel(c, quality = 'high') {
-  const key = c.dataset.model;
-  if (!orbit.has(c)) orbit.set(c, { yaw: SAMPLE_OPTS[key].yaw, pitch: SAMPLE_OPTS[key].pitch });
-  const v = orbit.get(c);
-  renderSample(c, key, { width: 10, depth: 8, padX: 0.025, padY: 0.04, dof: 2.6, pitchRange: PITCH_RANGE, seed: SAMPLE_OPTS[key].seed, yaw: v.yaw, pitch: v.pitch, quality });
-}
-function paintVisibleTurf() {
-  $$('.model:not([hidden]) .sample-canvas').forEach((c) => {
-    if (c.dataset.drawn !== String(c.clientWidth)) drawModel(c);
-  });
-}
-$$('.model-visual').forEach((fig) => {
-  const c = $('.sample-canvas', fig);
-  if (!c) return;
-  fig.tabIndex = 0;
-  fig.setAttribute('aria-label', `${c.getAttribute('aria-label')} Drag, or use the arrow keys, to rotate the sample. Double-click to reset.`);
-  fig.insertAdjacentHTML('beforeend', '<span class="rotate-hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Drag to rotate</span>');
-  let raf = 0, idle = 0, vel = 0, last = null, dragging = false;
-  const state = () => orbit.get(c) || (drawModel(c), orbit.get(c));
-  const preview = () => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => { raf = 0; drawModel(c, 'low'); });
-    clearTimeout(idle);
-    idle = setTimeout(() => { if (!dragging && Math.abs(vel) < 0.05) drawModel(c, 'high'); }, 180);
-  };
-  const used = () => fig.classList.add('rotated');
-  const glide = () => {
-    if (dragging || Math.abs(vel) < 0.05 || reduceMotion.matches) { vel = 0; preview(); return; }
-    state().yaw += vel;
-    vel *= 0.92;
-    preview();
-    requestAnimationFrame(glide);
-  };
-  fig.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    dragging = true; vel = 0; last = [e.clientX, e.clientY];
-    fig.setPointerCapture(e.pointerId);
-    fig.classList.add('dragging'); used();
-  });
-  fig.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const dx = e.clientX - last[0], dy = e.clientY - last[1];
-    last = [e.clientX, e.clientY];
-    const st = state();
-    st.yaw += dx * 0.45;
-    st.pitch = clamp(st.pitch + dy * 0.3, PITCH_RANGE[0], PITCH_RANGE[1]);
-    vel = dx * 0.45;
-    preview();
-  });
-  const end = () => {
-    if (!dragging) return;
-    dragging = false; fig.classList.remove('dragging');
-    requestAnimationFrame(glide);
-  };
-  fig.addEventListener('pointerup', end);
-  fig.addEventListener('pointercancel', end);
-  fig.addEventListener('dblclick', () => {
-    const d = SAMPLE_OPTS[c.dataset.model];
-    Object.assign(state(), { yaw: d.yaw, pitch: d.pitch });
-    vel = 0; drawModel(c, 'high');
-  });
-  fig.addEventListener('keydown', (e) => {
-    const st = state();
-    const map = { ArrowLeft: [-12, 0], ArrowRight: [12, 0], ArrowUp: [0, -6], ArrowDown: [0, 6] };
-    if (!(e.key in map)) return;
-    e.preventDefault(); used();
-    st.yaw += map[e.key][0];
-    st.pitch = clamp(st.pitch + map[e.key][1], PITCH_RANGE[0], PITCH_RANGE[1]);
-    preview();
-  });
-});
 const selectProduct = initTabs($('[data-tabs="products"]'), (tab) => {
   const key = tab.dataset.key;
   productsSec.dataset.model = key;
@@ -155,7 +73,6 @@ const selectProduct = initTabs($('[data-tabs="products"]'), (tab) => {
     void panel.offsetWidth;
     panel.classList.add('enter');
   }
-  paintVisibleTurf();
 });
 pileItems.forEach((li) => li.addEventListener('click', () => {
   selectProduct(document.querySelector(`[data-tabs="products"] [data-key="${li.dataset.key}"]`), false);
@@ -165,12 +82,6 @@ $$('[data-product]').forEach((a) => a.addEventListener('click', () => {
   const tab = document.querySelector(`[data-tabs="products"] [data-key="${a.dataset.product}"]`);
   if (tab) selectProduct(tab, false);
 }));
-if ('IntersectionObserver' in window) {
-  const pio = new IntersectionObserver((en) => { if (en.some((e) => e.isIntersecting)) { paintVisibleTurf(); pio.disconnect(); } }, { rootMargin: '600px 0px' });
-  pio.observe(productsSec);
-} else paintVisibleTurf();
-let turfTimer;
-window.addEventListener('resize', () => { clearTimeout(turfTimer); turfTimer = setTimeout(paintVisibleTurf, 150); });
 
 $$('[data-interest]').forEach((a) => a.addEventListener('click', () => {
   const msg = $('#d-msg');
