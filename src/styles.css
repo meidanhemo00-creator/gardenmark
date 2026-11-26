@@ -1283,3 +1283,6 @@ body { background: var(--linen); color: var(--charcoal); }
 .proof-table td:nth-child(2) { font-family: var(--mono); font-size: .74rem; }
 .proof-note { margin-top: 14px; font-size: .86rem; color: var(--ink-2); }
 .pile-scale i { background: rgba(197, 224, 75, .16) !important; } .pile-scale li.on i { background: var(--leaf) !important; }
+.dog-band { margin: 0; }
+.dog-band .z1 { left: 6%; top: 10%; } .dog-band .z2 { left: 10%; bottom: 14%; } .dog-band .z3 { right: 8%; bottom: 9%; }
+@media (max-width: 760px) { .dog-band .z1 { left: 5%; top: 6%; } .dog-band .z2 { left: 5%; bottom: 8%; } .dog-band .z3 { right: 5%; bottom: 8%; } }

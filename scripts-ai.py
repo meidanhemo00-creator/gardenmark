@@ -25,6 +25,8 @@ JOBS = {  # name: (file, centre y as fraction, aspect w/h, output widths)
   'rooftop':       ('rooftop.jpg',  .55, 3/2,  (1440, 720)),
   'shade':         ('shade.jpg',    .55, 3/2,  (1440, 720)),
   'dog':           ('dog.jpg',      .62, 3/2,  (1440, 720)),
+  'dog-play-wide': ('dog-play.jpg', .46, 16/9, (1856, 1200)),
+  'dog-play-tall': ('dog-play.jpg', .50, 4/5,  (1200, 600)),
 }
 for name, (f, cy, ar, widths) in JOBS.items():
     im = Image.open(SRC + f).convert('RGB'); W, H = im.size
