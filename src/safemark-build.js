@@ -91,7 +91,7 @@ export function buildInstall(svg) {
   g += `<g class="b-fade glue" data-step="4"><path d="${ringPath}" fill="none" stroke="#c5e04b" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 7" pathLength="1000"/></g>`;
   const [nx, ny] = iso(W + 0.2, 1.4, D * 0.55);
   g += `<g class="b-fade nonail" data-step="4" data-only="4" transform="translate(${f(nx + 26)} ${f(ny - 10)})">
-    <circle r="30" fill="#12140c" stroke="#afa857" stroke-width="1.5"/>
+    <circle r="30" fill="#0b2215" stroke="#afa857" stroke-width="1.5"/>
     <path d="M-2.6 -17h5.2v21l-2.6 8l-2.6 -8z M-8 -20h16v4h-16z" fill="#d9d6c2"/>
     <path d="M-21 21L21 -21" stroke="#c5e04b" stroke-width="4" stroke-linecap="round"/>
     <text y="48" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="1.5" fill="#c5e04b">NO NAILS</text>
