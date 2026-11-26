@@ -1055,3 +1055,15 @@ input[type="range"] { height: 32px; }
 .until p { color: var(--on-dark-2); }
 @media (max-width: 860px) { .proof-grid { grid-template-columns: 1fr; } }
 .craft .text-link, .proof .text-link { color: var(--leaf); }
+
+/* Closing CTA with a home photo */
+.dealer-split { display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 680px); gap: clamp(32px, 5vw, 72px); justify-content: center; align-items: start; }
+.dealer-split .intro { text-align: left; margin-inline: 0; }
+.dealer-photo { margin: 0; position: sticky; top: 100px; }
+.dealer-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-lg); }
+@media (max-width: 900px) {
+  .dealer-split { grid-template-columns: 1fr; }
+  .dealer-photo { position: static; }
+  .dealer-photo img { aspect-ratio: 4 / 3.4; object-position: 50% 62%; }
+  .dealer-split .intro { text-align: center; margin-inline: auto; }
+}
