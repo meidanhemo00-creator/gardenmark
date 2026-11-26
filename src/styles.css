@@ -198,6 +198,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .ledger { margin-top: clamp(80px, 10vw, 140px); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.ledger.one { grid-template-columns: 1fr; max-width: 760px; }
 .ledger > div { padding: 40px clamp(0px, 3vw, 40px) 0 0; }
 .ledger > div + div { padding-left: clamp(20px, 3vw, 40px); border-left: 1px solid var(--line); }
 .ledger h3 { font-size: var(--step-2); margin-bottom: 8px; }
