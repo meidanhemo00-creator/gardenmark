@@ -27,7 +27,7 @@ for name, (f, cx, cy, z) in JOBS.items():
     c.save(OUT + name + '.jpg', quality=90); print(name, c.size)
 
 # Website crops (webp, 1x and 2x). Turf type -> product: _14A9549-9614 Montana (tan curly thatch),
-# _14A9639-9705 Kentucky (tall straight blades), _14A9707-9750 Dakota (assumed, shorter and denser), _14A9758-9832 Augusta putting turf (golf only).
+# _14A9639-9750 Kentucky (tall straight blades), _14A9758-9832 Augusta putting turf (golf only).
 import os
 WEB = 'public/img/studio/web/'
 os.makedirs(WEB, exist_ok=True)
@@ -40,7 +40,6 @@ WEBJOBS = {  # name: (file, cx, cy, zoom (fraction of height), aspect w/h, 2x wi
   'montana':     ('_14A9604.jpg', .40, .55, .95, 10/11, 1200),
   'kentucky':    ('_14A9639.jpg', .52, .58, .90, 10/11, 1200),
   'augusta':     ('_14A9761.jpg', .55, .55, .95, 10/11, 1200),
-  'dakota':      ('_14A9740.jpg', .46, .60, .92, 10/11, 1200),   # _14A9707-9750 series, assumed Dakota (needs confirmation)
 }
 for name, (f, cx, cy, z, ar, w2) in WEBJOBS.items():
     im = ImageOps.exif_transpose(Image.open(SRC + f)).convert('RGB')
