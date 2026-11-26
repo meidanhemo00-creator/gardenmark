@@ -1067,3 +1067,24 @@ input[type="range"] { height: 32px; }
   .dealer-photo img { aspect-ratio: 4 / 3.4; object-position: 50% 62%; }
   .dealer-split .intro { text-align: center; margin-inline: auto; }
 }
+
+/* Five products */
+.model-tabs { grid-template-columns: repeat(5, 1fr); }
+.pile-scale ol { grid-template-columns: repeat(5, 1fr); }
+.compare { min-width: 860px; }
+.products[data-model="dakota"] { --tint: rgba(140, 170, 70, .18); }
+@media (max-width: 900px) { .model-tabs { grid-template-columns: repeat(3, 1fr); } .pile-scale ol { gap: 8px; } }
+@media (max-width: 520px) { .model-tabs { grid-template-columns: repeat(2, 1fr); } .pile-scale b { font-size: .8rem; } .pile-scale span { font-size: .66rem; } }
+
+/* Hero: the home in front, the material beside it */
+.hero-photos { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(12px, 1.6vw, 20px); width: min(100% - 2 * var(--gutter), 1280px); margin: clamp(36px, 5vw, 56px) auto 0; padding-bottom: clamp(28px, 4vw, 44px); align-items: stretch; }
+.hero-photos figure { margin: 0; position: relative; min-width: 0; }
+.hero-home img { width: 100%; height: 100%; aspect-ratio: 1.2; object-fit: cover; border-radius: var(--radius-lg); }
+.hero-photos .hero-photo { width: auto; margin: 0; display: grid; grid-template-rows: 1fr auto; }
+.hero-photos .hero-photo img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border-radius: var(--radius-lg); }
+.hero-photos .hero-photo .cap-mono { padding: 10px 0 0; text-align: left; }
+@media (max-width: 760px) {
+  .hero-photos { grid-template-columns: 1fr; }
+  .hero-photos .hero-photo { display: none; }
+  .hero-home img { aspect-ratio: 1.1; }
+}

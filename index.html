@@ -85,14 +85,15 @@
       <li><a href="#proof">The Proof File: test reports in preparation</a></li>
     </ul>
   </div>
-  <!-- Lifestyle slot: a high-resolution lifestyle image (2560px wide or more) could later sit beside or replace this studio photo. -->
-  <figure class="hero-photo">
-    <picture>
-      <source media="(max-width: 760px)" srcset="/img/studio/web/hero-tall.webp 600w, /img/studio/web/hero-tall@2x.webp 1200w" sizes="calc(100vw - 32px)">
-      <img src="/img/studio/web/hero-wide.webp" srcset="/img/studio/web/hero-wide.webp 1280w, /img/studio/web/hero-wide@2x.webp 2560w" sizes="min(100vw - 80px, 1280px)" width="1280" height="471" alt="Studio photo of Montana synthetic grass seen from the side: blades in several greens standing over a tan, curly thatch on a black backing." fetchpriority="high">
-    </picture>
-    <figcaption class="cap-mono">Montana / 1.75 in pile / studio photo, GardenMark turf</figcaption>
-  </figure>
+  <div class="hero-photos">
+    <figure class="hero-home">
+      <img src="/img/lifestyle/hero-home.webp" srcset="/img/lifestyle/hero-home.webp 800w, /img/lifestyle/hero-home@2x.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), min(58vw, 740px)" width="800" height="667" alt="A white clapboard house with hydrangea beds and a maple tree, seen from low across a full green lawn." fetchpriority="high">
+    </figure>
+    <figure class="hero-photo">
+      <img src="/img/studio/web/hero-tall.webp" srcset="/img/studio/web/hero-tall.webp 600w, /img/studio/web/hero-tall@2x.webp 1200w" sizes="min(40vw, 520px)" width="600" height="480" alt="Studio photo of Montana synthetic grass seen from the side: blades in several greens standing over a tan, curly thatch on a black backing." loading="lazy">
+      <figcaption class="cap-mono">Montana / 1.75 in pile / studio photo</figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- B: Placement -->
@@ -151,7 +152,7 @@
             <dt>Plan for</dt><dd>A compacted crushed-stone base with a slight fall for drainage. Bumps in the base show through the turf.</dd>
             <dt>Edges</dt><dd>A clean line against beds and stone is what makes it look considered.</dd>
           </dl>
-          <div class="pick"><a class="chip" href="#products" data-product="kentucky">Kentucky</a><a class="chip" href="#products" data-product="montana">Montana</a></div>
+          <div class="pick"><a class="chip" href="#products" data-product="dakota">Dakota</a><a class="chip" href="#products" data-product="kentucky">Kentucky</a><a class="chip" href="#products" data-product="montana">Montana</a></div>
         </div>
       </article>
 
@@ -223,13 +224,14 @@
 <section class="section products dark on-dark" data-dark id="products" aria-labelledby="products-title" data-model="montana">
   <div class="container">
     <div class="intro">
-      <h2 id="products-title">Four surfaces, one system.</h2>
-      <p>Two landscape styles, a putting green and a pet turf. All four go down on the same stone base with the same GardenMark seaming tape, adhesive and nails.</p>
+      <h2 id="products-title">Five surfaces, one system.</h2>
+      <p>Three landscape styles, a putting green and a pet turf. All five go down on the same stone base with the same GardenMark seaming tape, adhesive and nails.</p>
     </div>
 
     <div class="model-tabs" role="tablist" aria-label="GardenMark grass styles" data-tabs="products">
       <button role="tab" id="pt-montana" aria-controls="pp-montana" aria-selected="true" data-key="montana"><span class="series">landscape</span><b>Montana</b></button>
       <button role="tab" id="pt-kentucky" aria-controls="pp-kentucky" aria-selected="false" tabindex="-1" data-key="kentucky"><span class="series">landscape</span><b>Kentucky</b></button>
+      <button role="tab" id="pt-dakota" aria-controls="pp-dakota" aria-selected="false" tabindex="-1" data-key="dakota"><span class="series">landscape</span><b>Dakota</b></button>
       <button role="tab" id="pt-augusta" aria-controls="pp-augusta" aria-selected="false" tabindex="-1" data-key="augusta"><span class="series">putting</span><b>Augusta</b></button>
       <button role="tab" id="pt-canine" aria-controls="pp-canine" aria-selected="false" tabindex="-1" data-key="canine"><span class="series">pets &amp; play</span><b>Canine</b></button>
     </div>
@@ -292,6 +294,48 @@
           </table>
           <p class="drawer-note">Choosing between Montana and Kentucky? Ask your dealer to show both side by side, outdoors and in daylight. The thatch color changes how the lawn reads from a distance.</p>
           <div class="docs"><a class="btn btn-ghost" href="https://gardenmark.com/wp-content/uploads/2026/01/GardenMark-Installation-Guide-V2026A.pdf" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-doc"/></svg>Installation guide (PDF)</a><a class="text-link" href="mailto:info@gardenmark.com?subject=Kentucky%20data%20sheet%20request">Request the data sheet</a></div>
+        </details>
+      </div>
+    </article>
+
+    <!-- Dakota -->
+    <article class="model" role="tabpanel" id="pp-dakota" aria-labelledby="pt-dakota" tabindex="0" data-model="dakota" hidden>
+      <figure class="model-visual is-photo">
+        <img src="/img/studio/web/dakota.webp" srcset="/img/studio/web/dakota.webp 600w, /img/studio/web/dakota@2x.webp 1200w" sizes="(max-width: 900px) calc(100vw - 32px), 600px" width="600" height="660" alt="Studio photo of a Dakota sample folded back: a dense, shorter pile in several greens over a black backing." loading="lazy">
+        <figcaption class="cap-mono">Dakota / studio photo, GardenMark turf</figcaption>
+      </figure>
+      <div class="model-copy">
+        <p class="series">landscape series</p>
+        <h3>Dakota</h3>
+        <p class="pitch">The tidy lawn. A shorter 1.18 in pile in four colors, from bi-color Justice Green and Justice Olive blades, over a green and yellow curl.</p>
+        <dl class="facts">
+          <div><dt>Pile height</dt><dd>1.18 in</dd></div>
+          <div><dt>Colors</dt><dd>4</dd></div>
+          <div><dt>Drainage</dt><dd>400 gal/h</dd></div>
+        </dl>
+        <p class="story">For whole backyards, side yards and the lawn under the trees, where you want a close, even look that reads like a freshly cut lawn.</p>
+        <div class="model-cta"><a class="btn btn-leaf" href="#dealer" data-interest="Dakota">Find a dealer for Dakota</a></div>
+        <details class="specs-drawer">
+          <summary>Specifications and documents</summary>
+          <table class="specs"><caption class="sr-only">Dakota specifications</caption>
+            <tr><th scope="row">Pile height</th><td>1.18 in</td></tr>
+            <tr><th scope="row">Gauge</th><td>3/8 in</td></tr>
+            <tr><th scope="row">Stitch rate</th><td>64 stitches/ft (2,048/sf)</td></tr>
+            <tr><th scope="row">Top yarn</th><td>Justice Green &amp; Justice Olive bi-color (4 colors)</td></tr>
+            <tr><th scope="row">Curl yarn</th><td>Green &amp; yellow</td></tr>
+            <tr><th scope="row">Yarn</th><td>PE monofilament, C-shape, 8,800 dtex</td></tr>
+            <tr><th scope="row">Face weight</th><td>56 oz/sq m</td></tr>
+            <tr><th scope="row">Total weight</th><td>103 oz/sq m</td></tr>
+            <tr><th scope="row">Backing</th><td>PP black woven primary, PP fiber secondary, polyurethane coating</td></tr>
+            <tr><th scope="row">Drainage</th><td>400 gallons/hour</td></tr>
+            <tr><th scope="row">UV</th><td>4.5%</td></tr>
+            <tr><th scope="row">Fire rating</th><td>Class B</td></tr>
+            <tr><th scope="row">Rolls</th><td>15 ft x 100 ft</td></tr>
+            <tr><th scope="row">Infill</th><td>Not needed in standard installs. Required over a SafeMark shock pad.</td></tr>
+            <tr><th scope="row">Warranty</th><td>20-year limited, through your dealer, professional installation required</td></tr>
+          </table>
+          <p class="drawer-note">Figures from the Dakota data sheet (2025 V2), as the manufacturer states them. Independent reports will follow in the Proof File.</p>
+          <div class="docs"><a class="btn btn-ghost" href="https://gardenmark.com/wp-content/uploads/2026/01/GardenMark-Installation-Guide-V2026A.pdf" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-doc"/></svg>Installation guide (PDF)</a><a class="text-link" href="mailto:info@gardenmark.com?subject=Dakota%20data%20sheet%20request">Request the data sheet</a></div>
         </details>
       </div>
     </article>
@@ -364,23 +408,24 @@
       <ol>
         <li data-key="montana" style="--pile:1.75"><i aria-hidden="true"></i><b>Montana</b><span>1.75 in</span></li>
         <li data-key="kentucky" style="--pile:1.75"><i aria-hidden="true"></i><b>Kentucky</b><span>1.75 in</span></li>
+        <li data-key="dakota" style="--pile:1.18"><i aria-hidden="true"></i><b>Dakota</b><span>1.18 in</span></li>
         <li data-key="augusta" style="--pile:.7"><i aria-hidden="true"></i><b>Augusta</b><span>0.70 in</span></li>
         <li data-key="canine" style="--pile:1"><i aria-hidden="true"></i><b>Canine</b><span>1 in</span></li>
       </ol>
     </div>
 
     <details class="compare-drawer">
-      <summary>Compare all four side by side</summary>
+      <summary>Compare all five side by side</summary>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Product comparison table, scrolls horizontally">
         <table class="compare">
-          <thead><tr><th scope="col"><span class="sr-only">Attribute</span></th><th scope="col">Montana</th><th scope="col">Kentucky</th><th scope="col">Augusta</th><th scope="col">Canine</th></tr></thead>
+          <thead><tr><th scope="col"><span class="sr-only">Attribute</span></th><th scope="col">Montana</th><th scope="col">Kentucky</th><th scope="col">Dakota</th><th scope="col">Augusta</th><th scope="col">Canine</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Look</th><td>3 greens, brown curly thatch</td><td>3 greens, green thatch</td><td>Bentgrass look</td><td>Pet turf with additives</td></tr>
-            <tr><th scope="row">Best for</th><td>Lawns, gardens, terraces</td><td>Lawns, gardens, terraces</td><td>Putting greens</td><td>Pets, backyard sports</td></tr>
-            <tr><th scope="row">Pile height</th><td>1.75 in</td><td>1.75 in</td><td>0.70 in</td><td>1 in</td></tr>
-            <tr><th scope="row">Gauge</th><td>3/8 in</td><td>3/8 in</td><td>3/16 in</td><td>3/8 in</td></tr>
-            <tr><th scope="row">Roll sizes</th><td>7.5 or 15 × 100 ft</td><td>7.5 or 15 × 100 ft</td><td>15 × 100 ft</td><td>15 × 100 ft</td></tr>
-            <tr><th scope="row">Infill</th><td>Not needed*</td><td>Not needed*</td><td>Optional</td><td>Not needed*</td></tr>
+            <tr><th scope="row">Look</th><td>3 greens, brown curly thatch</td><td>3 greens, green thatch</td><td>4 colors, green &amp; yellow curl</td><td>Bentgrass look</td><td>Pet turf with additives</td></tr>
+            <tr><th scope="row">Best for</th><td>Lawns, gardens, terraces</td><td>Lawns, gardens, terraces</td><td>Whole backyards, shade lawns</td><td>Putting greens</td><td>Pets, backyard sports</td></tr>
+            <tr><th scope="row">Pile height</th><td>1.75 in</td><td>1.75 in</td><td>1.18 in</td><td>0.70 in</td><td>1 in</td></tr>
+            <tr><th scope="row">Gauge</th><td>3/8 in</td><td>3/8 in</td><td>3/8 in</td><td>3/16 in</td><td>3/8 in</td></tr>
+            <tr><th scope="row">Roll sizes</th><td>7.5 or 15 × 100 ft</td><td>7.5 or 15 × 100 ft</td><td>15 × 100 ft</td><td>15 × 100 ft</td><td>15 × 100 ft</td></tr>
+            <tr><th scope="row">Infill</th><td>Not needed*</td><td>Not needed*</td><td>Not needed*</td><td>Optional</td><td>Not needed*</td></tr>
           </tbody>
         </table>
       </div>
@@ -763,11 +808,7 @@
 
 <!-- Final CTA -->
 <section class="section dealer on-dark" data-dark id="dealer" aria-labelledby="dealer-title">
-  <div class="container dealer-split">
-    <figure class="dealer-photo">
-      <img src="/img/lifestyle/nj-house.webp" srcset="/img/lifestyle/nj-house.webp 600w, /img/lifestyle/nj-house@2x.webp 1200w" sizes="(max-width: 900px) calc(100vw - 32px), 460px" width="600" height="750" alt="A white clapboard house with hydrangea beds and a maple tree, seen from low across a full green lawn." loading="lazy">
-    </figure>
-    <div class="dealer-main">
+  <div class="narrow">
     <div class="intro">
       <h2 id="dealer-title">Let’s find your dealer.</h2>
       <p>Tell us where the project is and what it’s for. GardenMark will point you to a dealer who serves your area.</p>
@@ -790,7 +831,6 @@
     </form>
     <p class="direct"><span>Prefer to call? <a href="tel:+18777118873">1-877-711-8873</a></span><span><a href="mailto:info@gardenmark.com">info@gardenmark.com</a></span></p>
   </div>
-  </div>
 </section>
 </main>
 
@@ -801,7 +841,7 @@
         <a class="brand" href="#top"><svg aria-hidden="true"><use href="#gm-mark"/></svg><span>GardenMark<sup>®</sup></span></a>
         <p>Synthetic grass and installation accessories, sold through dealers across the U.S.</p>
       </div>
-      <div><h4>Grass</h4><ul><li><a href="#products" data-product="montana">Montana</a></li><li><a href="#products" data-product="kentucky">Kentucky</a></li><li><a href="#products" data-product="augusta">Augusta</a></li><li><a href="#products" data-product="canine">Canine</a></li><li><a href="#safemark">SafeMark</a></li></ul></div>
+      <div><h4>Grass</h4><ul><li><a href="#products" data-product="montana">Montana</a></li><li><a href="#products" data-product="kentucky">Kentucky</a></li><li><a href="#products" data-product="dakota">Dakota</a></li><li><a href="#products" data-product="augusta">Augusta</a></li><li><a href="#products" data-product="canine">Canine</a></li><li><a href="#safemark">SafeMark</a></li></ul></div>
       <div><h4>Information</h4><ul><li><a href="#materials">Materials</a></li><li><a href="#warranty">Warranty</a></li><li><a href="#gallery">Projects</a></li><li><a href="#pros">For professionals</a></li><li><a href="https://gardenmarkcanada.ca" target="_blank" rel="noopener">GardenMark Canada</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="tel:+18777118873">1-877-711-8873</a></li><li><a href="mailto:info@gardenmark.com">info@gardenmark.com</a></li><li>240 Moonachie Ave, Unit #500<br>Moonachie, NJ 07074</li><li>Mail: PO #5120, Hoboken, NJ 07030</li></ul></div>
     </div>

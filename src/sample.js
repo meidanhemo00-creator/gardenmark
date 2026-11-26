@@ -7,6 +7,7 @@
 export const MODELS = {
   montana: { pile: 1.75, greens: ['#3c5a20', '#678c2c', '#9dba50'], thatch: '#a99057', bw: [0.07, 0.13], density: 92 },
   kentucky: { pile: 1.75, greens: ['#2f5520', '#52842a', '#87b343'], thatch: '#6f8c35', bw: [0.07, 0.13], density: 92 },
+  dakota: { pile: 1.18, greens: ['#3d5d22', '#5f8a2d', '#8fb14a'], thatch: '#8f9440', bw: [0.06, 0.11], density: 120 },
   augusta: { pile: 0.7, greens: ['#43742a', '#528532', '#62953a'], thatch: null, bw: [0.035, 0.06], density: 260, ball: true },
   canine: { pile: 1, greens: ['#385f26', '#4f8330', '#6c9c40'], thatch: null, bw: [0.06, 0.1], density: 140 },
 };

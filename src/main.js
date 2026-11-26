@@ -68,6 +68,7 @@ const pileItems = $$('.pile-scale li');
 const SAMPLE_OPTS = {
   montana: { yaw: -26, pitch: 32, seed: 11 },
   kentucky: { yaw: -26, pitch: 32, seed: 12 },
+  dakota: { yaw: -26, pitch: 32, seed: 15 },
   augusta: { yaw: -30, pitch: 36, seed: 13 },
   canine: { yaw: -22, pitch: 32, seed: 14 },
 };
