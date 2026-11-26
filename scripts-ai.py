@@ -1,14 +1,19 @@
 # Approved lifestyle images (public/img/ai/*.jpg, 1856 x 2304) -> lively web crops (webp). Never upscales.
 import os, numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 SRC, OUT = 'public/img/ai/', 'public/img/ai/web/'
 os.makedirs(OUT, exist_ok=True)
-def grade(im):
+def grade(im, seed=7):
+    # Photographic, not AI-smooth: clear the haze, real blacks, an S-curve, a touch of sharpening and fine grain.
+    im = im.filter(ImageFilter.UnsharpMask(radius=2.2, percent=60, threshold=2))
     a = np.asarray(im).astype(np.float32) / 255
-    lum = a.mean(2, keepdims=True)
-    a = lum + (a - lum) * 1.2                  # livelier color
-    a = np.clip((a - .5) * 1.04 + .5, 0, 1)    # a touch more contrast
-    a[..., 0] *= 1.015; a[..., 2] *= .975      # warm daylight
+    lo = np.percentile(a, 0.6, axis=(0, 1)); hi = np.percentile(a, 99.7, axis=(0, 1))
+    a = np.clip((a - lo) / (hi - lo), 0, 1)
+    a = np.clip(a + 1.0 * a * (1 - a) * (a - .5), 0, 1) ** 1.05
+    lum = a.mean(2, keepdims=True); a = lum + (a - lum) * 1.12
+    a[..., 0] *= .99; a[..., 2] *= 1.01
+    g = np.random.default_rng(seed).normal(0, .016, a.shape[:2])[..., None]
+    a = a + g * (1 - np.abs(a - .5))
     return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
 JOBS = {  # name: (file, centre y as fraction, aspect w/h, output widths)
   'family-wide':   ('family.jpg',   .50, 16/9, (1856, 1200)),

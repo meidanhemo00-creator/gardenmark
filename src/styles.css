@@ -1226,3 +1226,16 @@ h1 b, h2 b, h3 b { font-weight: 700; color: inherit; }
 .craft-system, .until { border-top-color: var(--moss) !important; }
 .vs-table td:last-child { border-left-color: var(--moss); background: rgba(63, 76, 32, .06); }
 .dealer-form .proto { background: var(--mist); }
+
+/* Off-white, not beige; more contrast */
+:root {
+  --linen: #f3f3f0;
+  --paper: #fafaf8;
+  --mist: #e6e6e1;
+  --leaf-soft: #ecece7;
+  --charcoal: #0f110c;
+  --ink-2: #393b31;
+  --line: rgba(15, 17, 12, .18);
+}
+body { background: var(--linen); color: var(--charcoal); }
+.hero .lede, .intro p, .spot-plan dd, .vs-table td, .ledger .sub, .vs .sub { color: var(--ink-2); }
