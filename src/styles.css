@@ -1286,3 +1286,8 @@ body { background: var(--linen); color: var(--charcoal); }
 .dog-band { margin: 0; }
 .dog-band .z1 { left: 6%; top: 10%; } .dog-band .z2 { left: 10%; bottom: 14%; } .dog-band .z3 { right: 8%; bottom: 9%; }
 @media (max-width: 760px) { .dog-band .z1 { left: 5%; top: 6%; } .dog-band .z2 { left: 5%; bottom: 8%; } .dog-band .z3 { right: 5%; bottom: 8%; } }
+
+/* Headlines like the posts: regular weight, key words bold */
+h1, h2, h3, h4, .model-copy h3, .sm-head h2, .sm-build-head h3, .intro h2, .warranty h2, .dealer .intro h2 { font-weight: 400 !important; letter-spacing: -.03em !important; }
+h1 b, h2 b, h3 b, h4 b { font-weight: 700 !important; }
+.model-tabs b, .hc-head b, .pl-brand, .sc-num { font-weight: 600 !important; }
