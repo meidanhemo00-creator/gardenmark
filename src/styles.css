@@ -1211,3 +1211,18 @@ h1 b, h2 b, h3 b { font-weight: 700; color: inherit; }
 @media (max-width: 760px) { .dealer-band img { aspect-ratio: 4 / 3.4; } }
 .dealer .direct a { color: var(--charcoal); }
 @media (max-width: 760px) { .hero { padding-top: 96px; } }
+
+/* One color per block: labels, captions and values match the text around them */
+.series, .intro .series, .cap-mono, .craft-grid figcaption .cap-mono, .proof .series, .spots .outcome .series { color: inherit !important; opacity: 1; }
+.facts dt, .facts dd { color: inherit !important; }
+.sc-head, .sc-sub, .sc-swatches span, .sc-note, .sc-facts { color: var(--linen) !important; }
+.hc-head .mono { color: inherit !important; }
+.proof-label dt, .pl-note { color: inherit !important; }
+.vs-table thead th, .vs-table thead th:last-child, .vs-table td, .vs-table td:last-child { color: inherit !important; }
+.craft-grid figcaption, .craft-grid figcaption .cap-mono { color: var(--ink-2) !important; }
+
+/* Less lime: white pills, moss accent lines. Lime stays on the main action buttons only. */
+.pill { background: #fff; color: var(--forest-deep); }
+.craft-system, .until { border-top-color: var(--moss) !important; }
+.vs-table td:last-child { border-left-color: var(--moss); background: rgba(63, 76, 32, .06); }
+.dealer-form .proto { background: var(--mist); }
