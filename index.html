@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="/src/styles.css">
   <script>document.documentElement.classList.add('js')</script>
@@ -71,29 +71,32 @@
 <main id="main">
 
 <!-- A: Hero -->
-<section class="hero" id="hero" data-dark aria-labelledby="hero-title">
+<section class="hero" id="hero" aria-labelledby="hero-title">
   <div class="container hero-copy">
-    <h1 id="hero-title">A lawn worth coming home to.</h1>
-    <p class="lede"><b>The whole yard, green for good.</b> GardenMark synthetic grass from the patio to the back fence, sold and installed by local dealers.</p>
+    <h1 id="hero-title">A lawn worth <b>coming home to.</b></h1>
+    <p class="lede">The whole yard, green for good. GardenMark synthetic grass from the patio to the back fence, sold and installed by local dealers.</p>
     <div class="hero-ctas">
       <a class="btn btn-leaf" href="#dealer"><svg aria-hidden="true"><use href="#i-pin"/></svg>Find a dealer</a>
       <a class="btn btn-ghost" href="#spots">See the yard</a>
     </div>
-    <ul class="trust" aria-label="About GardenMark">
-      <li>Supplier based in Moonachie, NJ</li>
-      <li>20-year limited warranty, through your dealer</li>
-      <li><a href="#proof">The Proof File: test reports in preparation</a></li>
-    </ul>
   </div>
-  <div class="hero-photos">
-    <figure class="hero-home">
-      <img src="/img/lifestyle/hero-home.webp" srcset="/img/lifestyle/hero-home.webp 800w, /img/lifestyle/hero-home@2x.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), min(58vw, 740px)" width="800" height="667" alt="A white clapboard house with hydrangea beds and a maple tree, seen from low across a full green lawn." fetchpriority="high">
-    </figure>
-    <figure class="hero-photo">
-      <img src="/img/studio/web/hero-tall.webp" srcset="/img/studio/web/hero-tall.webp 600w, /img/studio/web/hero-tall@2x.webp 1200w" sizes="min(40vw, 520px)" width="600" height="480" alt="Studio photo of Montana synthetic grass seen from the side: blades in several greens standing over a tan, curly thatch on a black backing." loading="lazy">
-      <figcaption class="cap-mono">Montana / 1.75 in pile / studio photo</figcaption>
-    </figure>
-  </div>
+  <figure class="hero-stage">
+    <picture>
+      <source media="(max-width: 760px)" srcset="/img/ai/web/family-tall.webp 600w, /img/ai/web/family-tall@2x.webp 1200w" sizes="100vw">
+      <img src="/img/ai/web/family-wide.webp" srcset="/img/ai/web/family-wide.webp 1200w, /img/ai/web/family-wide@2x.webp 1856w" sizes="100vw" width="1200" height="675" alt="A mother crouching on a green lawn, laughing, as her two young sons run to her." fetchpriority="high">
+    </picture>
+    <span class="pill p1">Back fence</span>
+    <span class="pill p2">Patio edge</span>
+    <div class="hero-card">
+      <div class="hc-head"><div><b>Montana</b><span class="mono">1.75 in pile</span></div><div class="chips"><span>3 greens</span><span>Tan thatch</span></div></div>
+      <img src="/img/studio/web/hero-tall.webp" srcset="/img/studio/web/hero-tall.webp 600w, /img/studio/web/hero-tall@2x.webp 1200w" sizes="(max-width: 760px) calc(100vw - 56px), 380px" width="600" height="480" alt="Close-up of Montana synthetic grass from the side: blades in several greens over a tan, curly thatch." loading="lazy">
+    </div>
+  </figure>
+  <ul class="trust container" aria-label="About GardenMark">
+    <li>Supplier based in Moonachie, NJ</li>
+    <li>20-year limited warranty, through your dealer</li>
+    <li><a href="#proof">The Proof File: test reports in preparation</a></li>
+  </ul>
 </section>
 
 <!-- B: Placement -->
@@ -101,15 +104,23 @@
   <div class="container">
     <div class="intro">
       <p class="series">Placement</p>
-      <h2 id="spots-title">The whole yard, green for good.</h2>
+      <h2 id="spots-title">The whole yard, <b>green for good.</b></h2>
       <p>From the patio edge to the back fence, one lawn that looks the same in August as it does in May. No bare corners under the trees, no mud by the gate, no brown patches after a dry week. A certified installer builds the base, lays the turf and finishes every edge.</p>
     </div>
+
+    <figure class="band-photo">
+      <picture>
+        <source media="(max-width: 760px)" srcset="/img/ai/web/backyard-tall.webp 600w, /img/ai/web/backyard-tall@2x.webp 1200w" sizes="calc(100vw - 32px)">
+        <img src="/img/ai/web/backyard-wide.webp" srcset="/img/ai/web/backyard-wide.webp 1200w, /img/ai/web/backyard-wide@2x.webp 1856w" sizes="min(100vw - 80px, 1280px)" width="1200" height="675" alt="A white colonial house behind a wide, even green lawn, with hydrangea beds and a maple tree." loading="lazy">
+      </picture>
+      <span class="pill b1">Patio edge</span><span class="pill b2">Under the trees</span><span class="pill b3">Dog run</span><span class="pill b4">Back fence</span>
+    </figure>
 
     <div class="outcomes">
       <article class="outcome" id="spot-terrace">
         <figure class="outcome-media reveal" style="margin:0">
-          <img src="/img/gm/rooftop-1-uniform@2x.webp" width="1536" height="917" alt="A rooftop deck with GardenMark synthetic grass, two white lounge chairs and a view across the water to a city skyline." loading="lazy">
-          <figcaption class="tag-photo real">GardenMark project</figcaption>
+          <img src="/img/ai/web/rooftop.webp" srcset="/img/ai/web/rooftop.webp 720w, /img/ai/web/rooftop@2x.webp 1440w" sizes="(max-width: 800px) calc(100vw - 32px), 560px" width="720" height="480" alt="A city rooftop terrace with green turf, a wooden bench, potted grasses and the Manhattan skyline beyond." loading="lazy">
+          <span class="pill">Rooftop</span>
         </figure>
         <div>
           <p class="series">01 / Terraces, rooftops, small yards</p>
@@ -126,6 +137,7 @@
       <article class="outcome" id="spot-dogs">
         <figure class="outcome-media reveal" style="margin:0">
           <img src="/img/lifestyle/kids-dog.webp" width="1440" height="960" alt="Two young girls laughing on synthetic grass beside a large tan dog." loading="lazy">
+          <span class="pill">Dog run</span>
         </figure>
         <div>
           <p class="series">02 / Dogs</p>
@@ -141,8 +153,8 @@
 
       <article class="outcome" id="spot-shade">
         <figure class="outcome-media reveal" style="margin:0">
-          <img src="/img/gm/nyc-1_uniform@2x.webp" width="1440" height="860" alt="A shaded city backyard with GardenMark synthetic grass in dappled light under mature trees." loading="lazy">
-          <figcaption class="tag-photo real">GardenMark project</figcaption>
+          <img src="/img/ai/web/shade.webp" srcset="/img/ai/web/shade.webp 720w, /img/ai/web/shade@2x.webp 1440w" sizes="(max-width: 800px) calc(100vw - 32px), 560px" width="720" height="480" alt="A green lawn running to the trunk of a big shade tree, with a wooden bench, ferns and a white picket fence." loading="lazy">
+          <span class="pill">Under the trees</span>
         </figure>
         <div>
           <p class="series">03 / Shade and slopes</p>
@@ -159,7 +171,7 @@
       <article class="outcome" id="spot-golf">
         <figure class="outcome-media reveal" style="margin:0">
           <img src="/img/gm/putting-green_uniform@2x.webp" width="1536" height="917" alt="A backyard putting green in GardenMark Augusta surrounded by fringe turf, flowering shrubs and stone." loading="lazy">
-          <figcaption class="tag-photo real">GardenMark project</figcaption>
+          <span class="pill">Backyard green</span>
         </figure>
         <div>
           <p class="series">04 / The backyard golfer</p>
@@ -194,11 +206,11 @@
 </section>
 
 <!-- C: Craft -->
-<section class="section craft" data-dark id="craft" aria-labelledby="craft-title">
+<section class="section craft" id="craft" aria-labelledby="craft-title">
   <div class="container">
     <div class="intro">
       <p class="series">Craft</p>
-      <h2 id="craft-title">Up close, it reads as a lawn.</h2>
+      <h2 id="craft-title">Up close, it <b>reads as a lawn.</b></h2>
       <p>This is where people decide. These are studio photos of GardenMark turf, unretouched apart from a color grade: layered greens, a curly thatch that fills the base like last year’s growth, and a backing built to be seamed.</p>
     </div>
     <div class="craft-grid">
@@ -227,7 +239,7 @@
 <section class="section products dark on-dark" data-dark id="products" aria-labelledby="products-title" data-model="montana">
   <div class="container">
     <div class="intro">
-      <h2 id="products-title">Five surfaces, one system.</h2>
+      <h2 id="products-title">Five surfaces, <b>one system.</b></h2>
       <p>Three landscape styles, a putting green and a pet turf. All five go down on the same stone base with the same GardenMark seaming tape, adhesive and nails.</p>
     </div>
 
@@ -243,7 +255,6 @@
     <article class="model" role="tabpanel" id="pp-montana" aria-labelledby="pt-montana" tabindex="0" data-model="montana">
       <figure class="model-visual is-photo">
         <img src="/img/studio/web/montana.webp" srcset="/img/studio/web/montana.webp 600w, /img/studio/web/montana@2x.webp 1200w" sizes="(max-width: 900px) calc(100vw - 32px), 600px" width="600" height="660" alt="Studio photo of a Montana sample folded over on itself: blades in several greens over a tan curly thatch, with the black backing showing." loading="lazy">
-        <figcaption class="cap-mono">Montana / studio photo, GardenMark turf</figcaption>
       </figure>
       <div class="model-copy">
         <p class="series">landscape series</p>
@@ -274,7 +285,6 @@
     <article class="model" role="tabpanel" id="pp-kentucky" aria-labelledby="pt-kentucky" tabindex="0" data-model="kentucky" hidden>
       <figure class="model-visual is-photo">
         <img src="/img/studio/web/kentucky.webp" srcset="/img/studio/web/kentucky.webp 600w, /img/studio/web/kentucky@2x.webp 1200w" sizes="(max-width: 900px) calc(100vw - 32px), 600px" width="600" height="660" alt="Studio photo of a Kentucky sample from the corner: tall, straight blades in bright and deep greens." loading="lazy">
-        <figcaption class="cap-mono">Kentucky / studio photo, GardenMark turf</figcaption>
       </figure>
       <div class="model-copy">
         <p class="series">landscape series</p>
@@ -351,7 +361,6 @@
     <article class="model" role="tabpanel" id="pp-augusta" aria-labelledby="pt-augusta" tabindex="0" data-model="augusta" hidden>
       <figure class="model-visual is-photo">
         <img src="/img/studio/web/augusta.webp" srcset="/img/studio/web/augusta.webp 600w, /img/studio/web/augusta@2x.webp 1200w" sizes="(max-width: 900px) calc(100vw - 32px), 600px" width="600" height="660" alt="Studio photo of an Augusta putting turf sample folded back: a short, dense, even surface over a black backing." loading="lazy">
-        <figcaption class="cap-mono">Augusta / studio photo, GardenMark turf</figcaption>
       </figure>
       <div class="model-copy">
         <p class="series">putting series</p>
@@ -539,11 +548,11 @@
 </section>
 
 <!-- Proof File -->
-<section class="section proof" data-dark id="proof" aria-labelledby="proof-title">
+<section class="section proof" id="proof" aria-labelledby="proof-title">
   <div class="container">
     <div class="intro">
       <p class="series">The Proof File</p>
-      <h2 id="proof-title">Don’t take our word for it. Read the report.</h2>
+      <h2 id="proof-title">Don’t take our word for it. <b>Read the report.</b></h2>
       <p>We are building a test program that will send every GardenMark model to an independent, ISO 17025 accredited lab and publish every full report here, with the method, the scope and the date. No reports are published yet, so this page makes no test claims. This is what the Proof File will contain.</p>
     </div>
     <div class="proof-grid">
@@ -672,7 +681,7 @@
   <div class="container">
     <div class="warranty-grid">
       <div>
-        <h2 id="warranty-title">The warranty, in plain English.</h2>
+        <h2 id="warranty-title">The warranty, <b>in plain English.</b></h2>
         <p style="color:var(--ink-2)">A 20-year limited warranty on GardenMark grass, through your dealer, with professional installation required. It is prorated, and it is a promise about the material, not a promise that the lawn will look new for 20 years.</p>
         <ul class="plain">
           <li><b>What it covers:</b> grass that substantially changes from UV degradation, beyond a change in texture. GardenMark supplies replacement grass.</li>
@@ -699,7 +708,7 @@
 <section class="section gallery on-dark" data-dark id="gallery" aria-labelledby="gallery-title">
   <div class="container">
     <div class="intro">
-      <h2 id="gallery-title">Installed, not imagined.</h2>
+      <h2 id="gallery-title">Installed, <b>not imagined.</b></h2>
       <p>Real GardenMark installations across residential, urban, waterfront, recreation and commercial projects.</p>
     </div>
     <div class="filters" role="group" aria-label="Filter projects">
@@ -817,10 +826,17 @@
 </section>
 
 <!-- Final CTA -->
-<section class="section dealer on-dark" data-dark id="dealer" aria-labelledby="dealer-title">
+<section class="section dealer" id="dealer" aria-labelledby="dealer-title">
+  <figure class="dealer-band">
+    <picture>
+      <source media="(max-width: 760px)" srcset="/img/ai/web/home-tall.webp 600w, /img/ai/web/home-tall@2x.webp 1200w" sizes="100vw">
+      <img src="/img/ai/web/home-wide.webp" srcset="/img/ai/web/home-wide.webp 1200w, /img/ai/web/home-wide@2x.webp 1856w" sizes="100vw" width="1200" height="675" alt="A shingled cottage with a porch, hydrangeas and a stone path curving across a green lawn to the steps." loading="lazy">
+    </picture>
+    <span class="pill d1">From the gate</span><span class="pill d2">Up the steps</span>
+  </figure>
   <div class="narrow">
     <div class="intro">
-      <h2 id="dealer-title">Let’s find your dealer.</h2>
+      <h2 id="dealer-title">Let’s find <b>your dealer.</b></h2>
       <p>Tell us where the project is and what it’s for. GardenMark will point you to a dealer who serves your area.</p>
     </div>
     <form class="dealer-form" id="dealer-form" novalidate>
